@@ -1,14 +1,16 @@
 package github.compile.mapper.mapping;
 
+import java.util.List;
+
 public class DefaultValueMappingDefinition implements IMappingDefinition {
 	private Object defaultValue;
-	private String targetPath;
+	private List<PathNode> targetPath;
 
-	public String getTargetPath() {
+	public List<PathNode> getTargetPath() {
 		return targetPath;
 	}
 
-	public void setTargetPath(String targetPath) {
+	public void setTargetPath(List<PathNode> targetPath) {
 		this.targetPath = targetPath;
 	}
 

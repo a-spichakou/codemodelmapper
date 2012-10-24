@@ -1,8 +1,8 @@
-package test.mapper;
 
-import java.util.Date;
+package test.mapper;
 
 
 public class Mapper {
 
+   
 }

@@ -1,10 +1,12 @@
 package github.compile.mapper.source;
 
-import java.util.Date;
-
+import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
 
-public class DefaultValueSourceDefinition extends AbstractSourceDefinition implements ISourceDefinition {
+public class DefaultValueSourceDefinition extends AbstractSourceDefinition{
 	private Object defultValue;
 
 	public Object getDefultValue() {
@@ -15,32 +17,19 @@ public class DefaultValueSourceDefinition extends AbstractSourceDefinition imple
 		this.defultValue = defultValue;
 	}
 
-	public JMethod extendJMethod(JMethod method) {
+	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
 
-		final StringBuffer statement = new StringBuffer();
-		statement.append("// Set default value\r\n");
-		statement.append(TARGET_MEMBER);
-		statement.append(".");
-		statement.append(getTargetMethod().getName());
-		statement.append("(");
-		final String guessDefaultValueType = guessDefaultValueType();
-		statement.append(guessDefaultValueType);
-		statement.append(");");
-
-		final String statementStr = statement.toString();
-		method.body().directStatement(statementStr);
-		return method;
+		final JMethod getValueMethod = buildGetValueMethod(mapClass);
+		final JMethod jmethod = mapClass.method(JMod.PUBLIC, Void.TYPE, MAP_VALE_METHOD_NAME+"_"+getTargetField().name());
+		buildSetStatement(jmethod, codeModel, getValueMethod);
+		
+		return jmethod;
 	}
-
-	private String guessDefaultValueType() {
-		if (defultValue == null) {
-			return "";
-		}
-
-		if (defultValue instanceof Date) {
-			return "new Date(" + ((Date) defultValue).getTime() + "l)";
-		} else {
-			return defultValue.toString();
-		}
+	
+	private JMethod buildGetValueMethod(JDefinedClass mapClass)
+	{
+		final JMethod method = mapClass.method(JMod.PUBLIC, defultValue.getClass(), GET_VALUE_METHOD_NAME);
+		method.body()._return(JExpr.lit(defultValue.toString()));
+		return method;
 	}
 }

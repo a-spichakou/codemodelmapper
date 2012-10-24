@@ -1,13 +1,16 @@
 package github.compile.mapper.mapping;
 
-public class SimpleMappingDefinition extends DefaultValueMappingDefinition{	
-	private String sourcePath;
-	
-	public String getSourcePath() {
+import java.util.List;
+
+public class SimpleMappingDefinition extends DefaultValueMappingDefinition {
+	private List<PathNode> sourcePath;
+
+	public List<PathNode> getSourcePath() {
 		return sourcePath;
 	}
 
-	public void setSourcePath(String sourcePath) {
+	public void setSourcePath(List<PathNode> sourcePath) {
 		this.sourcePath = sourcePath;
 	}
+
 }
