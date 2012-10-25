@@ -5,7 +5,6 @@ import github.compile.mapper.mapping.MappingDefinitions;
 import github.compile.mapper.source.ISourceDefinition;
 import github.compile.mapper.source.SourceDefinitions;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,6 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
-import com.sun.codemodel.writer.SingleStreamCodeWriter;
 /**
  * Source generator
  * @author aspichakou
@@ -55,7 +53,7 @@ public class MapperSourceGenerator {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public void generateMapper(MappingDefinitions definitions) throws JClassAlreadyExistsException, IOException, ClassNotFoundException {
+	public JCodeModel generateMapper(MappingDefinitions definitions) throws JClassAlreadyExistsException, IOException, ClassNotFoundException {
 		final List<IMappingDefinition> definitionsList = definitions.getDefinitions();
 		if (definitionsList == null) {
 			throw new IllegalArgumentException("Definition list should not null");
@@ -75,17 +73,13 @@ public class MapperSourceGenerator {
 			final ISourceDefinition sourceDefinition = factory.getSourceDefinition(def);
 			codeModelDefinitions.add(sourceDefinition);
 		}
-		final String buildMapper = buildMapper(codeModelDefinitions);
-
-		System.out.print(buildMapper);
+		final JCodeModel buildMapper = buildMapper(codeModelDefinitions);
+		return buildMapper;
 	}
 
-	private String buildMapper(List<ISourceDefinition> codeModelDefinitions) throws JClassAlreadyExistsException, IOException {
+	private JCodeModel buildMapper(List<ISourceDefinition> codeModelDefinitions) throws JClassAlreadyExistsException, IOException {
 		final JCodeModel codeModel = new JCodeModel();
-		final JDefinedClass mapClass = codeModel._class(fullClassName); // Creates
-																		// a new
-																		// class
-
+		final JDefinedClass mapClass = codeModel._class(fullClassName); 
 		final JFieldVar sourceField = mapClass.field(JMod.PUBLIC, source, ISourceDefinition.SOURCE_MEMBER);
 		final JFieldVar targetField = mapClass.field(JMod.PUBLIC, target, ISourceDefinition.TARGET_MEMBER);
 
@@ -99,12 +93,7 @@ public class MapperSourceGenerator {
 
 			method.body().invoke(extendJMethod);
 		}
-
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		codeModel.build(new SingleStreamCodeWriter(out));
-		final String clazz = new String(out.toByteArray());
-
-		return clazz;
+		return codeModel;
 	}
 
 }

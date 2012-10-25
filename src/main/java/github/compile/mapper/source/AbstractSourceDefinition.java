@@ -119,17 +119,28 @@ public abstract class AbstractSourceDefinition implements ISourceDefinition {
 				jmethod.body().assign(decl, prevDecl.invoke(method.getName()));
 			} else {
 				jmethod.body().assign(decl, targetField.invoke(method.getName()));
-			}
-
-			prevDecl = decl;
+			}			
 
 			/*
 			 * if ((innertargetclass10==null)) { 
 			 *  innertargetclass10 = new InnerTargetClass1(); 
+			 *  target.setTarget3(innertargetclass10);
 			 * }
 			 */
 			final JConditional ifCond = jmethod.body()._if(JExpr.direct(localVarName + "==null"));
-			ifCond._then().assign(decl, JExpr._new(directClass));
+			final JInvocation newObject = JExpr._new(directClass);
+			ifCond._then().assign(decl, newObject);
+			
+			JInvocation setNewValueInvoke = null;
+			if (prevDecl != null) {
+				setNewValueInvoke = prevDecl.invoke(node.getSetMethod().getName());									
+			} else {
+				setNewValueInvoke = targetField.invoke(node.getSetMethod().getName());				
+			}
+			setNewValueInvoke.arg(decl);
+			ifCond._then().add(setNewValueInvoke);
+			
+			prevDecl = decl;
 		}
 		if (prevDecl != null) {
 			 // Object value;		       		     		        

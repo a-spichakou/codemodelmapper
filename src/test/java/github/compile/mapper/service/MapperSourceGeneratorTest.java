@@ -12,16 +12,19 @@ import github.compile.mapper.source.InnerTargetClass2;
 import github.compile.mapper.source.SourceObject;
 import github.compile.mapper.source.TargetObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.codemodel.JCodeModel;
 
 import junit.framework.TestCase;
 
 public class MapperSourceGeneratorTest extends TestCase {
 
-	/*public void testGenerateMapperDefaultValue()
+	public void testGenerateMapperDefaultValue()
 	{		
-		final MapperSourceGenerator generator = new MapperSourceGenerator("test.mapper.Mapper",SourceObject.class, TargetObject.class);
+		final MapperSourceGenerator generator = new MapperSourceGenerator("test.mapper.GenerateMapperDefaultValue",SourceObject.class, TargetObject.class);
 		final MappingDefinitions definitions = new MappingDefinitions();
 		final List<IMappingDefinition> definitionList = new ArrayList<IMappingDefinition>();
 		
@@ -50,16 +53,17 @@ public class MapperSourceGeneratorTest extends TestCase {
 		definitions.setDefinitions(definitionList);
 		
 		try {
-			generator.generateMapper(definitions);
+			final JCodeModel generateMapper = generator.generateMapper(definitions);
+			generateMapper.build(new File("./src/test/java"));
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
 		} 
-	}*/
+	}
 	
 	public void testGenerateMapperSimple()
 	{		
-		final MapperSourceGenerator generator = new MapperSourceGenerator("test.mapper.Mapper",SourceObject.class, TargetObject.class);
+		final MapperSourceGenerator generator = new MapperSourceGenerator("test.mapper.GenerateMapperSimple",SourceObject.class, TargetObject.class);
 		final MappingDefinitions definitions = new MappingDefinitions();
 		final List<IMappingDefinition> definitionList = new ArrayList<IMappingDefinition>();
 		
@@ -104,7 +108,8 @@ public class MapperSourceGeneratorTest extends TestCase {
 		definitions.setDefinitions(definitionList);
 				
 		try {
-			generator.generateMapper(definitions);
+			final JCodeModel generateMapper = generator.generateMapper(definitions);
+			generateMapper.build(new File("./src/test/java"));
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
