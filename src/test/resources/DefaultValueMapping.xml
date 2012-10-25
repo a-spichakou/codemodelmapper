@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<github.compile.mapper.mapping.MappingDefinitions>
+  <definitions>
+    <github.compile.mapper.mapping.DefaultValueMappingDefinition>
+      <defaultValue class="string">defaultValue</defaultValue>
+      <targetPath>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>github.compile.mapper.source.InnerTargetClass1</clazz>
+          <field>target3</field>
+        </github.compile.mapper.mapping.PathNode>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>github.compile.mapper.source.InnerTargetClass2</clazz>
+          <field>tg2</field>
+        </github.compile.mapper.mapping.PathNode>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>java.lang.String</clazz>
+          <field>tg3</field>
+        </github.compile.mapper.mapping.PathNode>
+      </targetPath>
+    </github.compile.mapper.mapping.DefaultValueMappingDefinition>
+  </definitions>
+</github.compile.mapper.mapping.MappingDefinitions>

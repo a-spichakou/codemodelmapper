@@ -1,6 +1,7 @@
 package github.compile.mapper.mapping;
 
 public class LookupMappingDefinition extends SimpleMappingDefinition {
+	public static final String LookupMappingDefinition="LookupMappingDefinition";
 
 	private String mappingClass;
 	private String lookupMethod;
@@ -21,4 +22,8 @@ public class LookupMappingDefinition extends SimpleMappingDefinition {
 		this.lookupMethod = lookupMethod;
 	}
 
+	@Override
+	public String getType() {
+		return LookupMappingDefinition;
+	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
  *
  */
 public class DefaultValueMappingDefinition implements IMappingDefinition {
+	public static final String DefaultValueMappingDefinition="DefaultValueMappingDefinition";
 	/**
 	 * Constant value
 	 */
@@ -30,6 +31,10 @@ public class DefaultValueMappingDefinition implements IMappingDefinition {
 
 	public void setDefaultValue(Object defaultValue) {
 		this.defaultValue = defaultValue;
+	}
+
+	public String getType() {		
+		return DefaultValueMappingDefinition;
 	}
 
 }

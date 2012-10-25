@@ -8,6 +8,8 @@ import java.util.List;
  *
  */
 public class SimpleMappingDefinition extends DefaultValueMappingDefinition {
+	public static final String SimpleMappingDefinition = "SimpleMappingDefinition";
+	
 	private List<PathNode> sourcePath;
 
 	public List<PathNode> getSourcePath() {
@@ -18,4 +20,8 @@ public class SimpleMappingDefinition extends DefaultValueMappingDefinition {
 		this.sourcePath = sourcePath;
 	}
 
+	@Override
+	public String getType() {
+		return SimpleMappingDefinition;
+	}	
 }
