@@ -14,7 +14,25 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Conver "text"-based mapping definition to Java "class"-based definition
+ * @author aspichakou
+ *
+ */
 public class SourceDefinitionFactory {
+	private Class source;
+	private Class target;
+
+
+	/**
+	 * 
+	 * @param source - source class object
+	 * @param target - target class object
+	 */
+	public SourceDefinitionFactory(Class source, Class target) {		
+		this.source = source;
+		this.target = target;
+	}
 
 	public ISourceDefinition getSourceDefinition(IMappingDefinition mappingDefinition) throws ClassNotFoundException {
 		if (mappingDefinition instanceof SimpleMappingDefinition) {
@@ -22,8 +40,8 @@ public class SourceDefinitionFactory {
 			final List<PathNode> source = def.getSourcePath();
 			final List<PathNode> target = def.getTargetPath();
 
-			final List<SourcePathNode> sourcePath = buildSourcePath(source);
-			final List<SourcePathNode> targetPath = buildSourcePath(target);
+			final List<SourcePathNode> sourcePath = buildSourcePath(source, this.source);
+			final List<SourcePathNode> targetPath = buildSourcePath(target, this.target);
 
 			final SimpleSourceDefinition codemodel = new SimpleSourceDefinition();
 			codemodel.setTargetPath(targetPath);
@@ -33,7 +51,7 @@ public class SourceDefinitionFactory {
 		} else if (mappingDefinition instanceof DefaultValueMappingDefinition) {
 			final DefaultValueMappingDefinition def = (DefaultValueMappingDefinition) mappingDefinition;
 			final List<PathNode> targetPath = def.getTargetPath();
-			final List<SourcePathNode> sourcePath = buildSourcePath(targetPath);
+			final List<SourcePathNode> sourcePath = buildSourcePath(targetPath, this.target);
 
 			final DefaultValueSourceDefinition codemodel = new DefaultValueSourceDefinition();
 			codemodel.setDefultValue(def.getDefaultValue());
@@ -44,7 +62,7 @@ public class SourceDefinitionFactory {
 		} else if (mappingDefinition instanceof LookupMappingDefinition) {
 			final LookupMappingDefinition def = (LookupMappingDefinition) mappingDefinition;
 			final List<PathNode> targetPath = def.getTargetPath();
-			final List<SourcePathNode> sourcePath = buildSourcePath(targetPath);
+			final List<SourcePathNode> sourcePath = buildSourcePath(targetPath, this.target);
 
 			final DefaultValueSourceDefinition codemodel = new DefaultValueSourceDefinition();
 			codemodel.setTargetPath(sourcePath);
@@ -54,15 +72,28 @@ public class SourceDefinitionFactory {
 		return null;
 	}
 
-	private List<SourcePathNode> buildSourcePath(List<PathNode> path) throws ClassNotFoundException {
+	private List<SourcePathNode> buildSourcePath(List<PathNode> path, Class rootClass) throws ClassNotFoundException {
 		final List<SourcePathNode> sourcePath = new ArrayList<SourcePathNode>();
 
+		Class<?> prevClass = null;
 		for (PathNode node : path) {
 			final String clazz = node.getClazz();
 			final Class<?> targetClass = getClass().getClassLoader().loadClass(clazz);
-			final Method[] methods = targetClass.getMethods();
+			
+			// Get getters/setter from Parent class
+			Method[] methods = null;
+			if(prevClass==null)
+			{
+				methods = rootClass.getMethods();				
+			}
+			else
+			{
+				methods = prevClass.getMethods();
+			}
 			final Method setmethod = getMethod(methods, node.getField(), true);
 			final Method getmethod = getMethod(methods, node.getField(), false);
+			
+			prevClass = targetClass;
 
 			final SourcePathNode sourceNode = new SourcePathNode();
 			sourceNode.setClazz(targetClass);

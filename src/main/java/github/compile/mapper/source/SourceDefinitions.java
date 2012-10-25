@@ -1,7 +1,11 @@
 package github.compile.mapper.source;
 
 import java.util.List;
-
+/**
+ * Source definition container
+ * @author aspichakou
+ *
+ */
 public class SourceDefinitions {
 
 	private List<ISourceDefinition> definitions;

@@ -17,19 +17,44 @@ import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.writer.SingleStreamCodeWriter;
-
+/**
+ * Source generator
+ * @author aspichakou
+ *
+ */
 public class MapperSourceGenerator {
+	/**
+	 * Source class
+	 */
 	private Class source;
+	/**
+	 * Target class
+	 */
 	private Class target;
-
+	/**
+	 * Name for generating file
+	 */
 	private String fullClassName;
 
+	/**
+	 * 
+	 * @param fullClassName - Name for new class (with package)
+	 * @param source - source class
+	 * @param target - target class
+	 */
 	public MapperSourceGenerator(String fullClassName, Class source, Class target) {
 		this.fullClassName = fullClassName;
 		this.source = source;
 		this.target = target;
 	}
 
+	/**
+	 * Generate source
+	 * @param definitions
+	 * @throws JClassAlreadyExistsException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public void generateMapper(MappingDefinitions definitions) throws JClassAlreadyExistsException, IOException, ClassNotFoundException {
 		final List<IMappingDefinition> definitionsList = definitions.getDefinitions();
 		if (definitionsList == null) {
@@ -42,7 +67,7 @@ public class MapperSourceGenerator {
 			throw new IllegalArgumentException("Given target object should not be null");
 		}
 
-		final SourceDefinitionFactory factory = new SourceDefinitionFactory();
+		final SourceDefinitionFactory factory = new SourceDefinitionFactory(source, target);
 		final List<ISourceDefinition> codeModelDefinitions = new ArrayList<ISourceDefinition>();
 		final SourceDefinitions sourceDefinitions = new SourceDefinitions();
 		sourceDefinitions.setDefinitions(codeModelDefinitions);

@@ -5,7 +5,11 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
-
+/**
+ * Source definition for constant value
+ * @author aspichakou
+ *
+ */
 public class DefaultValueSourceDefinition extends AbstractSourceDefinition{
 	private Object defultValue;
 
@@ -17,6 +21,9 @@ public class DefaultValueSourceDefinition extends AbstractSourceDefinition{
 		this.defultValue = defultValue;
 	}
 
+	/**
+	 * Map method generator
+	 */
 	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
 
 		final JMethod getValueMethod = buildGetValueMethod(mapClass);
@@ -26,6 +33,11 @@ public class DefaultValueSourceDefinition extends AbstractSourceDefinition{
 		return jmethod;
 	}
 	
+	/**
+	 * Put constant value to separate getValue() method
+	 * @param mapClass
+	 * @return
+	 */
 	private JMethod buildGetValueMethod(JDefinedClass mapClass)
 	{
 		final JMethod method = mapClass.method(JMod.PUBLIC, defultValue.getClass(), GET_VALUE_METHOD_NAME);

@@ -1,9 +1,19 @@
 package github.compile.mapper.mapping;
 
 import java.util.List;
-
+/**
+ * Mapping definition for constant
+ * @author aspichakou
+ *
+ */
 public class DefaultValueMappingDefinition implements IMappingDefinition {
+	/**
+	 * Constant value
+	 */
 	private Object defaultValue;
+	/**
+	 * Path to map in Target object
+	 */
 	private List<PathNode> targetPath;
 
 	public List<PathNode> getTargetPath() {

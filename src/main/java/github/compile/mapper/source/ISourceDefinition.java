@@ -4,7 +4,11 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
-
+/**
+ * Source definition interface
+ * @author aspichakou
+ *
+ */
 public interface ISourceDefinition {
 	public static final String GET_VALUE_METHOD_NAME = "getValue";
 	public static final String MAP_VALE_METHOD_NAME = "map";
