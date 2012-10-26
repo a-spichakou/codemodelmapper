@@ -21,5 +21,4 @@ public class InnerTargetClass1 {
 	public void setTg1(String tg1) {
 		this.tg1 = tg1;
 	}
-
 }

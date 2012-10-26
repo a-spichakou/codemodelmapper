@@ -8,6 +8,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JConditional;
 import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JVar;
@@ -51,11 +52,14 @@ public class PathConverterSourceParam implements IConverterSourceParam {
 			// innersourceclass10 = source.getSrc1();
 			// or
 			// innersourceclass21 = innersourceclass10.getSrc2();
-			if (prevDecl != null) {
-				jmethod.body().assign(decl, prevDecl.invoke(method.getName()));
+			
+			JExpression invoke = null;
+			if (prevDecl != null) {				
+				invoke = node.addParamToGetMethod(codeModel,jmethod,prevDecl);				
 			} else {
-				jmethod.body().assign(decl, sourceField.invoke(method.getName()));
+				invoke = node.addParamToGetMethod(codeModel,jmethod,sourceField);				
 			}
+			jmethod.body().assign(decl, invoke);
 
 			prevDecl = decl;
 

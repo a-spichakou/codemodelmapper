@@ -8,6 +8,7 @@ import github.compile.mapper.mapping.LookupMappingDefinition;
 import github.compile.mapper.mapping.PathConverterParam;
 import github.compile.mapper.mapping.PathNode;
 import github.compile.mapper.mapping.SimpleMappingDefinition;
+import github.compile.mapper.source.ComplexSourcePathNodeType;
 import github.compile.mapper.source.ConverterSourceDefinition;
 import github.compile.mapper.source.DefaultValueSourceDefinition;
 import github.compile.mapper.source.IConverterSourceParam;
@@ -116,21 +117,19 @@ public class SourceDefinitionFactory {
 					lookupMethod = method;
 					break;
 				}
-			}			
+			}
 			codemodel.setConverterMethod(lookupMethod);
 
-			// Build converter params 
-			final List<IConverterParam> converterParams = def.getConverterParams();			
+			// Build converter params
+			final List<IConverterParam> converterParams = def.getConverterParams();
 			final List<IConverterSourceParam> converterSourceParams = new ArrayList<IConverterSourceParam>();
-			for(IConverterParam param: converterParams)
-			{
-				if(param instanceof PathConverterParam)
-				{
-					final PathConverterParam pathParam = (PathConverterParam)param;
+			for (IConverterParam param : converterParams) {
+				if (param instanceof PathConverterParam) {
+					final PathConverterParam pathParam = (PathConverterParam) param;
 					final List<PathNode> paramPath = pathParam.getSourcePath();
 					final List<SourcePathNode> paramSourcePath = buildSourcePath(paramPath, this.source);
 					final PathConverterSourceParam pathConverterSourceParam = new PathConverterSourceParam();
-					pathConverterSourceParam.setSourcePath(paramSourcePath);					
+					pathConverterSourceParam.setSourcePath(paramSourcePath);
 					converterSourceParams.add(pathConverterSourceParam);
 				}
 			}
@@ -156,6 +155,7 @@ public class SourceDefinitionFactory {
 			} else {
 				methods = prevClass.getMethods();
 			}
+
 			final Method setmethod = getMethod(methods, node.getField(), true);
 			final Method getmethod = getMethod(methods, node.getField(), false);
 
@@ -165,6 +165,24 @@ public class SourceDefinitionFactory {
 			sourceNode.setClazz(targetClass);
 			sourceNode.setSetMethod(setmethod);
 			sourceNode.setGetMethod(getmethod);
+
+			final String type = node.getType();
+			if (ComplexSourcePathNodeType.SIMPLE.getType().equals(type)) {
+				sourceNode.setType(ComplexSourcePathNodeType.SIMPLE);
+			}
+			if (ComplexSourcePathNodeType.ARRAY.getType().equals(type)) {
+				sourceNode.setType(ComplexSourcePathNodeType.ARRAY);
+				sourceNode.setComplexParam(Integer.parseInt(node.getComplexParam()));
+			}
+			if (ComplexSourcePathNodeType.LIST.getType().equals(type)) {
+				sourceNode.setType(ComplexSourcePathNodeType.LIST);
+				sourceNode.setComplexParam(Integer.parseInt(node.getComplexParam()));
+			}
+			if (ComplexSourcePathNodeType.MAP.getType().equals(type)) {
+				sourceNode.setType(ComplexSourcePathNodeType.MAP);
+				sourceNode.setComplexParam(node.getComplexParam());
+			}			
+
 			sourcePath.add(sourceNode);
 		}
 		return sourcePath;

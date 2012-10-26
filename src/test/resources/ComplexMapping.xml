@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<github.compile.mapper.mapping.MappingDefinitions>
+  <definitions>
+    <github.compile.mapper.mapping.SimpleMappingDefinition>
+      <targetPath>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>github.compile.mapper.source.InnerTargetClass1</clazz>
+          <field>target3</field>
+        </github.compile.mapper.mapping.PathNode>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>github.compile.mapper.source.InnerTargetClass2</clazz>
+          <field>tg2</field>
+        </github.compile.mapper.mapping.PathNode>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>java.lang.String</clazz>
+          <field>tg3</field>
+        </github.compile.mapper.mapping.PathNode>
+      </targetPath>
+      <sourcePath>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>github.compile.mapper.source.InnerSourceClass1</clazz>
+          <field>src1</field>
+        </github.compile.mapper.mapping.PathNode>
+        <github.compile.mapper.mapping.PathNode>
+          <type>array</type>
+          <complexParam>0</complexParam>
+          <clazz>github.compile.mapper.source.InnerSourceClass2</clazz>
+          <field>tgArray</field>
+        </github.compile.mapper.mapping.PathNode>
+        <github.compile.mapper.mapping.PathNode>
+          <clazz>java.lang.String</clazz>
+          <field>source</field>
+        </github.compile.mapper.mapping.PathNode>
+      </sourcePath>
+    </github.compile.mapper.mapping.SimpleMappingDefinition>
+  </definitions>
+</github.compile.mapper.mapping.MappingDefinitions>
