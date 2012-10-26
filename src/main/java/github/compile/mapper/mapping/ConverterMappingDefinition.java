@@ -1,11 +1,15 @@
 package github.compile.mapper.mapping;
 
+import java.util.List;
+
 public class ConverterMappingDefinition extends SimpleMappingDefinition {
 
 	public static final String ConverterMappingDefinition = "ConverterMappingDefinition";
 
 	private String covrenerClass;
 	private String convertMethod;
+	
+	private List<IConverterParam> converterParams;
 
 	@Override
 	public String getType() {
@@ -28,4 +32,11 @@ public class ConverterMappingDefinition extends SimpleMappingDefinition {
 		this.convertMethod = convertMethod;
 	}
 
+	public List<IConverterParam> getConverterParams() {
+		return converterParams;
+	}
+
+	public void setConverterParams(List<IConverterParam> converterParams) {
+		this.converterParams = converterParams;
+	}	
 }

@@ -2,14 +2,18 @@ package github.compile.mapper.service;
 
 import github.compile.mapper.mapping.ConverterMappingDefinition;
 import github.compile.mapper.mapping.DefaultValueMappingDefinition;
+import github.compile.mapper.mapping.IConverterParam;
 import github.compile.mapper.mapping.IMappingDefinition;
 import github.compile.mapper.mapping.LookupMappingDefinition;
+import github.compile.mapper.mapping.PathConverterParam;
 import github.compile.mapper.mapping.PathNode;
 import github.compile.mapper.mapping.SimpleMappingDefinition;
 import github.compile.mapper.source.ConverterSourceDefinition;
 import github.compile.mapper.source.DefaultValueSourceDefinition;
+import github.compile.mapper.source.IConverterSourceParam;
 import github.compile.mapper.source.ISourceDefinition;
 import github.compile.mapper.source.LookupSourceDefinition;
+import github.compile.mapper.source.PathConverterSourceParam;
 import github.compile.mapper.source.SimpleSourceDefinition;
 import github.compile.mapper.source.SourcePathNode;
 
@@ -112,10 +116,25 @@ public class SourceDefinitionFactory {
 					lookupMethod = method;
 					break;
 				}
-			}
-
+			}			
 			codemodel.setConverterMethod(lookupMethod);
 
+			// Build converter params 
+			final List<IConverterParam> converterParams = def.getConverterParams();			
+			final List<IConverterSourceParam> converterSourceParams = new ArrayList<IConverterSourceParam>();
+			for(IConverterParam param: converterParams)
+			{
+				if(param instanceof PathConverterParam)
+				{
+					final PathConverterParam pathParam = (PathConverterParam)param;
+					final List<PathNode> paramPath = pathParam.getSourcePath();
+					final List<SourcePathNode> paramSourcePath = buildSourcePath(paramPath, this.source);
+					final PathConverterSourceParam pathConverterSourceParam = new PathConverterSourceParam();
+					pathConverterSourceParam.setSourcePath(paramSourcePath);					
+					converterSourceParams.add(pathConverterSourceParam);
+				}
+			}
+			codemodel.setConverterSourceParams(converterSourceParams);
 			return codemodel;
 		}
 
