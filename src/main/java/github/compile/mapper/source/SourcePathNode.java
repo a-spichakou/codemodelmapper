@@ -68,26 +68,27 @@ public class SourcePathNode {
 		}
 		final JVar decl = jmethod.body().decl(codeModel.ref(getMethod.getReturnType()), "varFromGetter");
 		
+		final JExpression complexParamAsLiteral = getComplexParamAsLiteral(codeModel);
 		if(type==ComplexSourcePathNodeType.ARRAY)
 		{			
 			jmethod.body().assign(decl, invoke);
 			final JConditional ifCond = jmethod.body()._if(decl.eq(JExpr._null()));
 			ifCond._then()._return(JExpr._null());
-			final  JExpression component = decl.component(JExpr.direct(complexParam.toString()));			
+			final  JExpression component = decl.component(complexParamAsLiteral);			
 			return component;
 		}
 		if(type==ComplexSourcePathNodeType.LIST)
 		{			
 			jmethod.body().assign(decl, invoke);
-			final JInvocation invoke2 = decl.invoke("get");			
-			invoke2.arg(JExpr.direct(complexParam.toString()));
+			final JInvocation invoke2 = decl.invoke("get");				
+			invoke2.arg(complexParamAsLiteral);
 			return invoke2;
 		}
 		if(type==ComplexSourcePathNodeType.MAP)
 		{			
 			jmethod.body().assign(decl, invoke);
-			final JInvocation invoke2 = decl.invoke("get");			
-			invoke2.arg(JExpr.direct(complexParam.toString()));
+			final JInvocation invoke2 = decl.invoke("get");									
+			invoke2.arg(complexParamAsLiteral);			
 			return invoke2;
 		}
 		return invoke;
@@ -144,7 +145,8 @@ public class SourcePathNode {
 			final JExpressionImpl addParamToSetWithInitMethod = addParamToSetWithInitMethod(codeModel,jmethod,target,declNewDelcare);
 			final JInvocation invoke = addParamToSetWithInitMethod.invoke("put");
 			jmethod.body().add(invoke);
-			invoke.arg(JExpr.direct(complexParam.toString()));
+			final JExpression complexParamAsLiteral = getComplexParamAsLiteral(codeModel);
+			invoke.arg(complexParamAsLiteral);
 			invoke.arg(value);
 		}
 	}
@@ -295,15 +297,16 @@ public class SourcePathNode {
 			ifCond._then().assign(newObjectVar, newObject);
 			// target.setMethod(newTargetList)			
 			ifCond._then().add(prevDecl.invoke(setMethod.getName()).arg(newObjectVar));				
-			
+						
 			// Check element null
-			// if (declNewDelcare.get(2) == null) {			
-			final JInvocation getByIndexInvoke = newObjectVar.invoke("get").arg(JExpr.direct(complexParam.toString()));
+			// if (declNewDelcare.get(2) == null) {						
+			final JExpression complexParamAsLiteral = getComplexParamAsLiteral(codeModel);
+			final JInvocation getByIndexInvoke = newObjectVar.invoke("get").arg(complexParamAsLiteral);
 			final JConditional ifCondElement = jmethod.body()._if(getByIndexInvoke.eq(JExpr._null()));
 			//declNewDelcare.set(2, new String());
 			final JInvocation setInvoke = newObjectVar.invoke("put");
 			ifCondElement._then().add(setInvoke);
-			setInvoke.arg(JExpr.direct(complexParam.toString()));
+			setInvoke.arg(complexParamAsLiteral);
 			setInvoke.arg(JExpr._new((returnClass)));					
 			
 			return newObjectVar;
@@ -311,7 +314,13 @@ public class SourcePathNode {
 		return null;								
 		
 	}	
-
+	
+	private JExpression getComplexParamAsLiteral(JCodeModel codeModel)
+	{
+		final JExpression literalByValue = Utils.getLiteralByValue(codeModel, complexParam);
+		return literalByValue;
+	}
+	
 	public Class getClazz() {
 		return clazz;
 	}

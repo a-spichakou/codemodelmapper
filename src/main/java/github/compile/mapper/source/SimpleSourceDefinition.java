@@ -19,7 +19,7 @@ public class SimpleSourceDefinition extends AbstractSourceDefinition {
 		getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME);
 		buildGetStatement(getValueMethod, codeModel);		
 		
-		final JMethod jmethod = mapClass.method(JMod.PUBLIC, Void.TYPE, MAP_VALE_METHOD_NAME+"_"+getTargetField().name());		
+		final JMethod jmethod = mapClass.method(JMod.PUBLIC, Void.TYPE, getMapMethodName());		
 		buildSetStatement(jmethod, codeModel, getValueMethod);
 		
 		return jmethod;

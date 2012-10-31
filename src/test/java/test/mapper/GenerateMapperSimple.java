@@ -14,29 +14,29 @@ public class GenerateMapperSimple {
     public TargetObject target;
 
     public void map() {
-        map_target0();
+        mapTarget0();
     }
 
     public Object getValue0() {
         InnerSourceClass1 innersourceclass10;
-        innersourceclass10 = source.getSrc1();
+        innersourceclass10 = ((InnerSourceClass1) source.getSrc1());
         if ((innersourceclass10==null)) {
             return null;
         }
         InnerSourceClass2 innersourceclass21;
-        innersourceclass21 = innersourceclass10 .getSrc2();
+        innersourceclass21 = ((InnerSourceClass2) innersourceclass10 .getSrc2());
         if ((innersourceclass21==null)) {
             return null;
         }
         String string2;
-        string2 = innersourceclass21 .getSource();
+        string2 = ((String) innersourceclass21 .getSource());
         if ((string2==null)) {
             return null;
         }
         return string2;
     }
 
-    public void map_target0() {
+    public void mapTarget0() {
         InnerTargetClass1 innertargetclass10;
         innertargetclass10 = target.getTarget3();
         if (innertargetclass10 == null) {

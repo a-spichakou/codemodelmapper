@@ -53,13 +53,27 @@ public class BuildMappersTest extends TestCase{
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}*/
+	}
 	
 	public void testBuildTestTreeComplex1level()
 	{
 		final XStream xstream = new XStream();
 		final MappingDefinitions definitions = (MappingDefinitions)xstream.fromXML(getClass().getResourceAsStream("/TestTreeComplex_1level.xml"));
 		final MapperSourceGenerator generator = new MapperSourceGenerator(getClass().getPackage().getName() + ".BuildTestTreeComplex1level", Source.class, Target.class);
+		
+		try {
+			final JCodeModel generateMapper = generator.generateMapper(definitions);
+			generateMapper.build(new File(PATH_TO_PUT));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}*/
+	
+	public void testBuildTestTreeSimple0level()
+	{
+		final XStream xstream = new XStream();
+		final MappingDefinitions definitions = (MappingDefinitions)xstream.fromXML(getClass().getResourceAsStream("/TestTreeSimple_0level.xml"));
+		final MapperSourceGenerator generator = new MapperSourceGenerator(getClass().getPackage().getName() + ".BuildTestTreeSimple0level", Source.class, Target.class);
 		
 		try {
 			final JCodeModel generateMapper = generator.generateMapper(definitions);

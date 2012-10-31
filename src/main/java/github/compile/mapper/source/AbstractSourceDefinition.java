@@ -12,6 +12,7 @@ import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JExpressionImpl;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
 import com.sun.codemodel.JVar;
 
 /**
@@ -77,7 +78,8 @@ public abstract class AbstractSourceDefinition implements ISourceDefinition {
 			} else {
 				invoke = node.addParamToGetMethod(codeModel,jmethod,sourceField);				
 			}
-			jmethod.body().assign(decl, invoke);
+			// add casting			
+			jmethod.body().assign(decl, JExpr.cast(decl.type(), invoke));
 
 			prevDecl = decl;
 
@@ -148,6 +150,16 @@ public abstract class AbstractSourceDefinition implements ISourceDefinition {
 			prevDecl = targetField;
 		}
 		sourcePathNode.addSet(codeModel, jmethod, prevDecl, decl);				
+	}
+	
+	public String getMapMethodName()
+	{
+		final StringBuffer buf = new StringBuffer();
+		final String name = getTargetField().name();
+		buf.append(MAP_VALE_METHOD_NAME);		
+		buf.append((name.charAt(0)+"").toUpperCase());
+		buf.append(name.substring(1));		
+		return buf.toString();
 	}
 
 	public JFieldVar getSourceField() {

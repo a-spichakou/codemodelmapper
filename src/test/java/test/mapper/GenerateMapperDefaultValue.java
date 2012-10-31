@@ -12,14 +12,14 @@ public class GenerateMapperDefaultValue {
     public TargetObject target;
 
     public void map() {
-        map_target0();
+        mapTarget0();
     }
 
     public String getValue0() {
         return "defaultValue";
     }
 
-    public void map_target0() {
+    public void mapTarget0() {
         InnerTargetClass1 innertargetclass10;
         innertargetclass10 = target.getTarget3();
         if (innertargetclass10 == null) {

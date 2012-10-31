@@ -33,7 +33,7 @@ public class GenerateMapperComplexTest extends TestCase{
 		assertNotNull(target3);
 		final HashMap stringMap = target3.getStringMap();
 		assertNotNull(stringMap);
-		final String tg1 = (String)stringMap.get(2);
+		final String tg1 = (String)stringMap.get("2");
 		assertEquals("value", tg1);
 	}
 	
