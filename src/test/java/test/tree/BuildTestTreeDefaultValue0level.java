@@ -9,16 +9,16 @@ public class BuildTestTreeDefaultValue0level {
     public Target target;
 
     public void map() {
-        map_target0();
-        map_target1();
-        map_target2();
+        mapTarget0();
+        mapTarget1();
+        mapTarget2();
     }
 
     public Integer getValue0() {
         return  99;
     }
 
-    public void map_target0() {
+    public void mapTarget0() {
         Integer value;
         Integer decl;
         value = getValue0();
@@ -30,7 +30,7 @@ public class BuildTestTreeDefaultValue0level {
         return "StringValue";
     }
 
-    public void map_target1() {
+    public void mapTarget1() {
         String value;
         String decl;
         value = getValue1();
@@ -42,7 +42,7 @@ public class BuildTestTreeDefaultValue0level {
         return new Date(1351692922000L);
     }
 
-    public void map_target2() {
+    public void mapTarget2() {
         Date value;
         Date decl;
         value = getValue2();

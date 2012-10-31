@@ -8,15 +8,15 @@ public class BuildTestTreeComplex1level {
     public Target target;
 
     public void map() {
-        map_target0();
-        map_target1();
+        mapTarget0();
+        mapTarget1();
     }
 
     public Integer getValue0() {
         return  96;
     }
 
-    public void map_target0() {
+    public void mapTarget0() {
         TargetLevel1 targetlevel10;
         targetlevel10 = target.getLevel1();
         if (targetlevel10 == null) {
@@ -46,7 +46,7 @@ public class BuildTestTreeComplex1level {
         return "StringValueComplexLevel1";
     }
 
-    public void map_target1() {
+    public void mapTarget1() {
         TargetLevel1 targetlevel10;
         targetlevel10 = target.getLevel1();
         if (targetlevel10 == null) {
