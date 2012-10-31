@@ -14,10 +14,10 @@ public class GenerateMapperComplex1 {
     public TargetObject target;
 
     public void map() {
-        map_target();
+        map_target0();
     }
 
-    public Object getValue() {
+    public Object getValue0() {
         InnerSourceClass1 innersourceclass10;
         innersourceclass10 = source.getSrc1();
         if ((innersourceclass10==null)) {
@@ -41,7 +41,7 @@ public class GenerateMapperComplex1 {
         return string2;
     }
 
-    public void map_target() {
+    public void map_target0() {
         InnerTargetClass1 innertargetclass10;
         innertargetclass10 = target.getTarget3();
         if (innertargetclass10 == null) {
@@ -56,7 +56,7 @@ public class GenerateMapperComplex1 {
         }
         Object value;
         String decl;
-        value = getValue();
+        value = getValue0();
         decl = ((String) value);
         innertargetclass21 .setTg3(decl);
     }

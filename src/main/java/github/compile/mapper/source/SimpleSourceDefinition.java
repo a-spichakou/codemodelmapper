@@ -16,7 +16,7 @@ public class SimpleSourceDefinition extends AbstractSourceDefinition {
 	 * Generator for separate map method
 	 */
 	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
-		final JMethod getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME);
+		getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME);
 		buildGetStatement(getValueMethod, codeModel);		
 		
 		final JMethod jmethod = mapClass.method(JMod.PUBLIC, Void.TYPE, MAP_VALE_METHOD_NAME+"_"+getTargetField().name());		

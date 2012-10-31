@@ -2,13 +2,13 @@ package github.compile.mapper.source;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.codemodel.JAssignmentTarget;
+import org.apache.commons.lang3.ClassUtils;
+
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JConditional;
@@ -17,6 +17,7 @@ import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JExpressionImpl;
 import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JPrimitiveType;
 import com.sun.codemodel.JVar;
 
 /**
@@ -169,7 +170,17 @@ public class SourcePathNode {
 			final int index = Integer.parseInt(complexParam.toString());
 			final int size = index+1;
 			// TargetObject[] newTargetArray = new TargetObject[idx+1]
-			final JExpression newObject = JExpr.newArray(returnClass,size);			
+			JExpression newObject = null;
+			final boolean wrapper = ClassUtils.isPrimitiveOrWrapper(clazz);
+			if(wrapper)
+			{
+				newObject = JExpr.newArray(JPrimitiveType.parse(codeModel, ClassUtils.wrapperToPrimitive(clazz).getName()),size);
+			}
+			else
+			{
+				newObject = JExpr.newArray(returnClass,size);
+			}
+						
 			ifCond._then().assign(newObjectVar, newObject);
 			// target.setMethod(newTargetArray)			
 			ifCond._then().add(prevDecl.invoke(setMethod.getName()).arg(newObjectVar));
@@ -182,7 +193,7 @@ public class SourcePathNode {
 			//if (declNewDelcare.length<(3)) {
 			final JConditional checkSizeIf = jmethod.body()._if(newObjectVar.ref("length").lt(JExpr.direct(size+"")));	
 			// newSizeArray = new String[ 3 ] ;
-			checkSizeIf._then().assign(newSizeArray, JExpr.newArray(returnClass,size));
+			checkSizeIf._then().assign(newSizeArray, newObject);
 			// innertargetclass10 .setStringArray(newSizeArray);
 			final JInvocation invoke = prevDecl.invoke(setMethod.getName());
 			checkSizeIf._then().add(invoke);
@@ -198,10 +209,13 @@ public class SourcePathNode {
 			staticInvokeCopyArray.arg(JExpr.direct(size+""));
 			
 			// Check element null
-			// if (declNewDelcare[(2)] == null) {			
-			final JConditional ifCondElement = checkSizeIf._else()._if(arrComponent.eq(JExpr._null()));
-			//declNewDelcare[(2)] = new String();
-			ifCondElement._then().assign(newObjectVar.component(JExpr.direct(complexParam.toString())), JExpr._new(returnClass));	
+			// if (declNewDelcare[(2)] == null) {		
+			if(!wrapper)
+			{
+				final JConditional ifCondElement = checkSizeIf._else()._if(arrComponent.eq(JExpr._null()));
+				//declNewDelcare[(2)] = new String();
+				ifCondElement._then().assign(newObjectVar.component(JExpr.direct(complexParam.toString())), JExpr._new(returnClass));					
+			}
 												
 			return newObjectVar.component(JExpr.direct(complexParam.toString()));
 		}
@@ -296,40 +310,7 @@ public class SourcePathNode {
 		}	
 		return null;								
 		
-	}
-
-	public JExpression addParamToSetMethod(JCodeModel codeModel, JMethod jmethod, JVar target) {
-		final JInvocation invoke = target.invoke(getMethod.getName());
-		if(complexParam==null)
-		{
-			return invoke;
-		}
-		final JVar decl = jmethod.body().decl(codeModel.ref(getMethod.getReturnType()), "varFromGetter");
-		
-		if(type==ComplexSourcePathNodeType.ARRAY)
-		{						
-			/*jmethod.body().assign(decl, invoke);
-			jmethod.body()._if(JExpr.)
-			final  JExpression component = decl.component(JExpr.direct(complexParam.toString()));			
-			return component;*/
-		}
-		if(type==ComplexSourcePathNodeType.LIST)
-		{			
-			jmethod.body().assign(decl, invoke);
-			final JInvocation invoke2 = decl.invoke("get");			
-			invoke2.arg(JExpr.direct(complexParam.toString()));
-			return invoke2;
-		}
-		if(type==ComplexSourcePathNodeType.MAP)
-		{			
-			jmethod.body().assign(decl, invoke);
-			final JInvocation invoke2 = decl.invoke("get");			
-			invoke2.arg(JExpr.direct(complexParam.toString()));
-			return invoke2;
-		}
-		return invoke;
-
-	}
+	}	
 
 	public Class getClazz() {
 		return clazz;

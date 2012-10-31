@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<github.compile.mapper.mapping.MappingDefinitions>
+	<definitions>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.lang.Integer">96</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<clazz>test.tree.TargetLevel1</clazz>
+					<field>level1</field>
+				</github.compile.mapper.mapping.PathNode>
+				<github.compile.mapper.mapping.PathNode>
+					<type>array</type>
+					<complexParam>2</complexParam>
+					<clazz>java.lang.Integer</clazz>
+					<field>level1primitiveArray</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.lang.String">StringValueComplexLevel1</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<clazz>test.tree.TargetLevel1</clazz>
+					<field>level1</field>
+				</github.compile.mapper.mapping.PathNode>
+				<github.compile.mapper.mapping.PathNode>
+					<type>array</type>
+					<complexParam>1</complexParam>
+					<clazz>java.lang.String</clazz>
+					<field>level1StriingArray</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>		
+	</definitions>
+</github.compile.mapper.mapping.MappingDefinitions>

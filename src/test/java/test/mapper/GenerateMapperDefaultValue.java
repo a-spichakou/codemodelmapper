@@ -12,14 +12,14 @@ public class GenerateMapperDefaultValue {
     public TargetObject target;
 
     public void map() {
-        map_target();
+        map_target0();
     }
 
-    public String getValue() {
+    public String getValue0() {
         return "defaultValue";
     }
 
-    public void map_target() {
+    public void map_target0() {
         InnerTargetClass1 innertargetclass10;
         innertargetclass10 = target.getTarget3();
         if (innertargetclass10 == null) {
@@ -34,7 +34,7 @@ public class GenerateMapperDefaultValue {
         }
         String value;
         String decl;
-        value = getValue();
+        value = getValue0();
         decl = ((String) value);
         innertargetclass21 .setTg3(decl);
     }

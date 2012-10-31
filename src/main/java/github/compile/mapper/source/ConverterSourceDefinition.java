@@ -35,10 +35,10 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 		buildInvokeConverterMethod(convertMethod, getParams, codeModel, mapClass);
 		
 		// build set method
-		final JMethod setMethod = mapClass.method(JMod.PUBLIC, Void.TYPE, MAP_VALE_METHOD_NAME+"_"+getTargetField().name());		
-		buildSetStatement(setMethod, codeModel, convertMethod);		
+		getValueMethod = mapClass.method(JMod.PUBLIC, Void.TYPE, MAP_VALE_METHOD_NAME+"_"+getTargetField().name());		
+		buildSetStatement(getValueMethod, codeModel, convertMethod);		
 		
-		return setMethod;
+		return getValueMethod;
 	}
 	
 	private void buildInvokeConverterMethod(JMethod jmethod, JMethod getParams, JCodeModel codeModel, JDefinedClass mapClass)

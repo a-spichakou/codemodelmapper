@@ -26,10 +26,10 @@ public class LookupSourceDefinition extends AbstractSourceDefinition {
 		buildLookupMethod(lookup, codeModel, mapClass);
 		
 		// build set method
-		final JMethod setMethod = mapClass.method(JMod.PUBLIC, Void.TYPE, MAP_VALE_METHOD_NAME+"_"+getTargetField().name());		
-		buildSetStatement(setMethod, codeModel, lookup);		
+		getValueMethod = mapClass.method(JMod.PUBLIC, Void.TYPE, MAP_VALE_METHOD_NAME+"_"+getTargetField().name());		
+		buildSetStatement(getValueMethod, codeModel, lookup);		
 		
-		return setMethod;
+		return getValueMethod;
 	}
 	
 	private void buildLookupMethod(JMethod jmethod, JCodeModel codeModel, JDefinedClass mapClass)

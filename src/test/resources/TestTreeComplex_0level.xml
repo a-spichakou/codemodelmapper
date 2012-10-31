@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<github.compile.mapper.mapping.MappingDefinitions>
+	<definitions>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.lang.Integer">97</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<type>array</type>
+					<complexParam>11</complexParam>
+					<clazz>java.lang.Integer</clazz>
+					<field>level0primitiveArray</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.lang.String">StringValueComplexLevel0</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<type>array</type>
+					<complexParam>13</complexParam>
+					<clazz>java.lang.String</clazz>
+					<field>level0StriingArray</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.util.Date">2012-10-11 12:15:22 -0200
+			</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<type>array</type>
+					<complexParam>2</complexParam>
+					<clazz>java.util.Date</clazz>
+					<field>level0DateArray</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+	</definitions>
+</github.compile.mapper.mapping.MappingDefinitions>

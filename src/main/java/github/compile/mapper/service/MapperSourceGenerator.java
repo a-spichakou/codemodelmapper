@@ -85,11 +85,16 @@ public class MapperSourceGenerator {
 
 		final JMethod method = mapClass.method(JMod.PUBLIC, Void.TYPE, "map");
 
+		int index=0;
 		for (ISourceDefinition sources : codeModelDefinitions) {
 			sources.setSourceField(sourceField);
 			sources.setTargetField(targetField);
 
 			final JMethod extendJMethod = sources.extendJMethod(codeModel, mapClass);
+			extendJMethod.name(extendJMethod.name()+index);
+			final JMethod getValueMethod = sources.getGetValueMethod();
+			getValueMethod.name(getValueMethod.name()+index);
+			index++;
 
 			method.body().invoke(extendJMethod);
 		}

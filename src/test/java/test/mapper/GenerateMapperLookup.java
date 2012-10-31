@@ -16,7 +16,7 @@ public class GenerateMapperLookup {
     public SimpleLookup lookup;
 
     public void map() {
-        map_target();
+        map_target00();
     }
 
     public String lookup_target() {
@@ -50,7 +50,7 @@ public class GenerateMapperLookup {
         return string2;
     }
 
-    public void map_target() {
+    public void map_target00() {
         InnerTargetClass1 innertargetclass10;
         innertargetclass10 = target.getTarget3();
         if (innertargetclass10 == null) {

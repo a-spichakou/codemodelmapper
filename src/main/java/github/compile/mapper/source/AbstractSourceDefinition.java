@@ -20,6 +20,8 @@ import com.sun.codemodel.JVar;
  *
  */
 public abstract class AbstractSourceDefinition implements ISourceDefinition {
+	protected JMethod getValueMethod;
+	
 	private JFieldVar sourceField;
 	private JFieldVar targetField;
 
@@ -164,4 +166,12 @@ public abstract class AbstractSourceDefinition implements ISourceDefinition {
 		this.targetField = targetField;
 	}
 
+	public JMethod getGetValueMethod() {
+		return getValueMethod;
+	}
+
+	public void setGetValueMethod(JMethod getValueMethod) {
+		this.getValueMethod = getValueMethod;
+	}
+	
 }

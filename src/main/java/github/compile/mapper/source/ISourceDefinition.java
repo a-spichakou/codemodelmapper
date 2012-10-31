@@ -21,4 +21,6 @@ public interface ISourceDefinition {
 	public void setTargetField(JFieldVar targetField);
 
 	public void setSourceField(JFieldVar sourceField);
+	
+	public JMethod getGetValueMethod();
 }

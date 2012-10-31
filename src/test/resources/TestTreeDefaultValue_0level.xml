@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<github.compile.mapper.mapping.MappingDefinitions>
+	<definitions>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.lang.Integer">99</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<clazz>java.lang.Integer</clazz>
+					<field>level0primitive</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.lang.String">StringValue</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<clazz>java.lang.String</clazz>
+					<field>level0String</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+		<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+			<defaultValue class="java.util.Date">2012-10-31 12:15:22 -0200</defaultValue>
+			<targetPath>
+				<github.compile.mapper.mapping.PathNode>
+					<clazz>java.util.Date</clazz>
+					<field>level0Complex</field>
+				</github.compile.mapper.mapping.PathNode>
+			</targetPath>
+		</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+	</definitions>
+</github.compile.mapper.mapping.MappingDefinitions>

@@ -158,6 +158,11 @@ public class SourceDefinitionFactory {
 
 			final Method setmethod = getMethod(methods, node.getField(), true);
 			final Method getmethod = getMethod(methods, node.getField(), false);
+			
+			if(setmethod==null || getmethod==null)
+			{
+				throw new IllegalArgumentException("There no such getter or setters for field: " + node.getField());
+			}
 
 			prevClass = targetClass;
 
