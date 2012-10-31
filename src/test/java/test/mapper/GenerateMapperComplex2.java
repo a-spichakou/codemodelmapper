@@ -1,34 +1,22 @@
 
 package test.mapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import github.compile.mapper.source.InnerSourceClass1;
 import github.compile.mapper.source.InnerSourceClass2;
 import github.compile.mapper.source.InnerTargetClass1;
-import github.compile.mapper.source.InnerTargetClass2;
-import github.compile.mapper.source.SimpleLookup;
 import github.compile.mapper.source.SourceObject;
 import github.compile.mapper.source.TargetObject;
+import github.compile.mapper.source.Utils;
 
-public class GenerateMapperLookup {
+public class GenerateMapperComplex2 {
 
     public SourceObject source;
     public TargetObject target;
-    public SimpleLookup lookup;
 
     public void map() {
         map_target();
-    }
-
-    public String lookup_target() {
-        if ((lookup==null)) {
-            return null;
-        }
-        Object value;
-        value = getValue();
-        String valueCasted;
-        valueCasted = ((String) value);
-        lookup.lookup(valueCasted);
-        return lookup.lookup(valueCasted);
     }
 
     public Object getValue() {
@@ -38,7 +26,12 @@ public class GenerateMapperLookup {
             return null;
         }
         InnerSourceClass2 innersourceclass21;
-        innersourceclass21 = innersourceclass10 .getSrc2();
+        InnerSourceClass2 [] varFromGetter;
+        varFromGetter = innersourceclass10 .getTgArray();
+        if (varFromGetter == null) {
+            return null;
+        }
+        innersourceclass21 = varFromGetter[(0)];
         if ((innersourceclass21==null)) {
             return null;
         }
@@ -57,17 +50,29 @@ public class GenerateMapperLookup {
             innertargetclass10 = new InnerTargetClass1();
             target.setTarget3(innertargetclass10);
         }
-        InnerTargetClass2 innertargetclass21;
-        innertargetclass21 = innertargetclass10 .getTg2();
-        if (innertargetclass21 == null) {
-            innertargetclass21 = new InnerTargetClass2();
-            innertargetclass10 .setTg2(innertargetclass21);
-        }
-        String value;
+        Object value;
         String decl;
-        value = lookup_target();
+        value = getValue();
         decl = ((String) value);
-        innertargetclass21 .setTg3(decl);
+        ArrayList declNewDelcare;
+        declNewDelcare = innertargetclass10 .getStringList();
+        if (declNewDelcare == null) {
+            declNewDelcare = new ArrayList();
+            innertargetclass10 .setStringList(declNewDelcare);
+        }
+        ArrayList newSizeList;
+        if (declNewDelcare.size()<(3)) {
+            newSizeList = new ArrayList((3));
+            Utils.initList(newSizeList, (3));
+            innertargetclass10 .setStringList(newSizeList);
+            Collections.copy(newSizeList, declNewDelcare);
+        } else {
+            newSizeList = declNewDelcare;
+            if (newSizeList.get((2)) == null) {
+                newSizeList.add((2), new String());
+            }
+        }
+        newSizeList.add((2), decl);
     }
 
 }

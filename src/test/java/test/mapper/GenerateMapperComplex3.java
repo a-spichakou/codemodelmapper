@@ -1,14 +1,14 @@
 
 package test.mapper;
 
+import java.util.HashMap;
 import github.compile.mapper.source.InnerSourceClass1;
 import github.compile.mapper.source.InnerSourceClass2;
 import github.compile.mapper.source.InnerTargetClass1;
-import github.compile.mapper.source.InnerTargetClass2;
 import github.compile.mapper.source.SourceObject;
 import github.compile.mapper.source.TargetObject;
 
-public class GenerateMapperComplex {
+public class GenerateMapperComplex3 {
 
     public SourceObject source;
     public TargetObject target;
@@ -26,6 +26,9 @@ public class GenerateMapperComplex {
         InnerSourceClass2 innersourceclass21;
         InnerSourceClass2 [] varFromGetter;
         varFromGetter = innersourceclass10 .getTgArray();
+        if (varFromGetter == null) {
+            return null;
+        }
         innersourceclass21 = varFromGetter[(0)];
         if ((innersourceclass21==null)) {
             return null;
@@ -41,21 +44,24 @@ public class GenerateMapperComplex {
     public void map_target() {
         InnerTargetClass1 innertargetclass10;
         innertargetclass10 = target.getTarget3();
-        if ((innertargetclass10==null)) {
+        if (innertargetclass10 == null) {
             innertargetclass10 = new InnerTargetClass1();
             target.setTarget3(innertargetclass10);
-        }
-        InnerTargetClass2 innertargetclass21;
-        innertargetclass21 = innertargetclass10 .getTg2();
-        if ((innertargetclass21==null)) {
-            innertargetclass21 = new InnerTargetClass2();
-            innertargetclass10 .setTg2(innertargetclass21);
         }
         Object value;
         String decl;
         value = getValue();
         decl = ((String) value);
-        innertargetclass21 .setTg3(decl);
+        HashMap declNewDelcare;
+        declNewDelcare = innertargetclass10 .getStringMap();
+        if (declNewDelcare == null) {
+            declNewDelcare = new HashMap();
+            innertargetclass10 .setStringMap(declNewDelcare);
+        }
+        if (declNewDelcare.get((2)) == null) {
+            declNewDelcare.put((2), new String());
+        }
+        declNewDelcare.put((2), decl);
     }
 
 }

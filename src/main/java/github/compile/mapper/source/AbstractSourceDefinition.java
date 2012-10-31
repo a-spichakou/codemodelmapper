@@ -11,7 +11,6 @@ import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JExpressionImpl;
 import com.sun.codemodel.JFieldVar;
-import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JVar;
 
@@ -116,55 +115,37 @@ public abstract class AbstractSourceDefinition implements ISourceDefinition {
 			idx++;
 			// InnerTargetClass1 innertargetclass10;
 			final JVar decl = jmethod.body().decl(directClass, localVarName);
-
-			// innertargetclass10 = target.getTarget3();
-			if (prevDecl != null) {
-				jmethod.body().assign(decl, prevDecl.invoke(method.getName()));
-			} else {
-				jmethod.body().assign(decl, targetField.invoke(method.getName()));
-			}			
-
+			
 			/*
 			 * if ((innertargetclass10==null)) { 
 			 *  innertargetclass10 = new InnerTargetClass1(); 
 			 *  target.setTarget3(innertargetclass10);
 			 * }
-			 */
-			final JConditional ifCond = jmethod.body()._if(JExpr.direct(localVarName + "==null"));
-			final JInvocation newObject = JExpr._new(directClass);
-			ifCond._then().assign(decl, newObject);
-			
-			JInvocation setNewValueInvoke = null;
+			 */			
+			// innertargetclass10 = target.getTarget3();
 			if (prevDecl != null) {
-				setNewValueInvoke = prevDecl.invoke(node.getSetMethod().getName());									
+				prevDecl = (JVar)node.addParamToSetWithInitMethod(codeModel,jmethod,prevDecl,decl);
 			} else {
-				setNewValueInvoke = targetField.invoke(node.getSetMethod().getName());				
-			}
-			setNewValueInvoke.arg(decl);
-			ifCond._then().add(setNewValueInvoke);
-			
-			prevDecl = decl;
+				prevDecl = (JVar)node.addParamToSetWithInitMethod(codeModel,jmethod,targetField,decl);
+			}			
+		}		
+		 // Object value;		       		     		        
+		final JVar value = jmethod.body().decl(getValueMethod.type(), "value");
+		final SourcePathNode sourcePathNode = targetPath.get(targetPath.size() - 1);
+		final JClass typeCastToThisClass = codeModel.ref(sourcePathNode.getClazz());
+		// String decl;
+		final JVar decl = jmethod.body().decl(typeCastToThisClass, "decl");
+		// value = getValue();
+		jmethod.body().assign(value, JExpr.invoke(getValueMethod));
+		//decl = ((String) value);
+		final JExpressionImpl cast = JExpr.cast(typeCastToThisClass, value);
+		jmethod.body().assign(decl, cast);
+	
+		if(prevDecl==null)
+		{			
+			prevDecl = targetField;
 		}
-		if (prevDecl != null) {
-			 // Object value;		       		     		        
-			final JVar value = jmethod.body().decl(getValueMethod.type(), "value");
-			final SourcePathNode sourcePathNode = targetPath.get(targetPath.size() - 1);
-			final JClass typeCastToThisClass = codeModel.ref(sourcePathNode.getClazz());
-			// String decl;
-			final JVar decl = jmethod.body().decl(typeCastToThisClass, "decl");
-			// value = getValue();
-			jmethod.body().assign(value, JExpr.invoke(getValueMethod));
-			//decl = ((String) value);
-			final JExpressionImpl cast = JExpr.cast(typeCastToThisClass, value);
-			jmethod.body().assign(decl, cast);
-			//innertargetclass21 .setTg3(decl);
-			final JInvocation invoke = prevDecl.invoke(sourcePathNode.getSetMethod().getName());
-			invoke.arg(decl);
-			jmethod.body().add(invoke);
-		} else {
-			final SourcePathNode sourcePathNode = targetPath.get(targetPath.size() - 1);
-			jmethod.body().add(targetField.invoke(sourcePathNode.getSetMethod().getName()));
-		}
+		sourcePathNode.addSet(codeModel, jmethod, prevDecl, decl);				
 	}
 
 	public JFieldVar getSourceField() {
