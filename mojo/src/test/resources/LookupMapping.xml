@@ -30,7 +30,7 @@
           <field>source</field>
         </github.compile.mapper.mapping.PathNode>
       </sourcePath>
-      <mappingClass>github.compile.mapper.source.SimpleLookup</mappingClass>
+      <mappingClass>github.compile.mapper.test1.SimpleLookup</mappingClass>
       <lookupMethod>lookup</lookupMethod>
     </github.compile.mapper.mapping.LookupMappingDefinition>
   </definitions>

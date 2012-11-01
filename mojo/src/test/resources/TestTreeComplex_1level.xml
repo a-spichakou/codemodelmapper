@@ -5,7 +5,7 @@
 			<defaultValue class="java.lang.Integer">96</defaultValue>
 			<targetPath>
 				<github.compile.mapper.mapping.PathNode>
-					<clazz>test.tree.TargetLevel1</clazz>
+					<clazz>github.compile.mapper.test.TargetLevel1</clazz>
 					<field>level1</field>
 				</github.compile.mapper.mapping.PathNode>
 				<github.compile.mapper.mapping.PathNode>
@@ -20,7 +20,7 @@
 			<defaultValue class="java.lang.String">StringValueComplexLevel1</defaultValue>
 			<targetPath>
 				<github.compile.mapper.mapping.PathNode>
-					<clazz>test.tree.TargetLevel1</clazz>
+					<clazz>github.compile.mapper.test.TargetLevel1</clazz>
 					<field>level1</field>
 				</github.compile.mapper.mapping.PathNode>
 				<github.compile.mapper.mapping.PathNode>

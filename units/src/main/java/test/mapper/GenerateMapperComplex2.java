@@ -3,7 +3,6 @@ package test.mapper;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import github.compile.mapper.source.Utils;
 import github.compile.mapper.test1.InnerSourceClass1;
 import github.compile.mapper.test1.InnerSourceClass2;

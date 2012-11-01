@@ -27,7 +27,7 @@ public class ComplexMapperSourceGeneratorTest extends TestCase{
 	/**
 	 * Have to put generate mappers to special Maven module
 	 */
-	private static final String PATH_TO_PUT = "../unit/src/test/java";
+	private static final String PATH_TO_PUT = "../units/src/main/java";
 	
 	public void testGenerateMapperComplex0() {
 		final MapperSourceGenerator generator = new MapperSourceGenerator(TEST_PACKAGE + "GenerateMapperComplex0", SourceObject.class, TargetObject.class);

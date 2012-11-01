@@ -30,7 +30,7 @@ public class MapperSourceGeneratorTest extends TestCase {
 	/**
 	 * Have to put generate mappers to special Maven module
 	 */
-	private static final String PATH_TO_PUT = "../unit/src/test/java";
+	private static final String PATH_TO_PUT = "../units/src/main/java";
 
 	public void testGenerateMapperDefaultValue() {
 		final MapperSourceGenerator generator = new MapperSourceGenerator(TEST_PACKAGE + "GenerateMapperDefaultValue", SourceObject.class, TargetObject.class);
@@ -131,7 +131,7 @@ public class MapperSourceGeneratorTest extends TestCase {
 
 		LookupMappingDefinition e = new LookupMappingDefinition();
 		e.setLookupMethod("lookup");
-		e.setMappingClass("github.compile.mapper.source.SimpleLookup");
+		e.setMappingClass("github.compile.mapper.test1.SimpleLookup");
 
 		final List<PathNode> targetPath = new ArrayList<PathNode>();
 		PathNode node = new PathNode();

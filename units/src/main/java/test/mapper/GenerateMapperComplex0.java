@@ -7,7 +7,6 @@ import github.compile.mapper.test1.InnerTargetClass1;
 import github.compile.mapper.test1.SourceObject;
 import github.compile.mapper.test1.TargetObject;
 
-
 public class GenerateMapperComplex0 {
 
     public SourceObject source;

@@ -9,7 +9,6 @@ import github.compile.mapper.test1.SimpleLookup;
 import github.compile.mapper.test1.SourceObject;
 import github.compile.mapper.test1.TargetObject;
 
-
 public class GenerateMapperLookup {
 
     public SourceObject source;

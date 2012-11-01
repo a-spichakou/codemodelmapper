@@ -1,6 +1,8 @@
 
 package test.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import github.compile.mapper.source.SimpleConverter;
 import github.compile.mapper.test1.InnerSourceClass1;
 import github.compile.mapper.test1.InnerSourceClass2;
@@ -8,9 +10,6 @@ import github.compile.mapper.test1.InnerTargetClass1;
 import github.compile.mapper.test1.InnerTargetClass2;
 import github.compile.mapper.test1.SourceObject;
 import github.compile.mapper.test1.TargetObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GenerateMapperConverter {
 

@@ -1,13 +1,12 @@
 
 package test.mapper;
 
+import java.util.HashMap;
 import github.compile.mapper.test1.InnerSourceClass1;
 import github.compile.mapper.test1.InnerSourceClass2;
 import github.compile.mapper.test1.InnerTargetClass1;
 import github.compile.mapper.test1.SourceObject;
 import github.compile.mapper.test1.TargetObject;
-
-import java.util.HashMap;
 
 public class GenerateMapperComplex3 {
 

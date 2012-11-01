@@ -5,7 +5,6 @@ import github.compile.mapper.test.Source;
 import github.compile.mapper.test.Target;
 import github.compile.mapper.test.TargetLevel1;
 
-
 public class BuildTestTreeComplex1level {
 
     public Source source;

@@ -6,8 +6,8 @@
 	<parent>
 		<groupId>mapper</groupId>
 		<artifactId>github.compile.mapper</artifactId>
-		<version>0.0.1-SNAPSHOT</version>	
-		<relativePath>../pom.xml</relativePath>	
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<dependencies>
 		<dependency>
@@ -32,4 +32,15 @@
 			<version>3.1</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

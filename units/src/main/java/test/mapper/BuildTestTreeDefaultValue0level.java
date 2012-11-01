@@ -1,10 +1,9 @@
 
 package test.mapper;
 
+import java.util.Date;
 import github.compile.mapper.test.Source;
 import github.compile.mapper.test.Target;
-
-import java.util.Date;
 
 public class BuildTestTreeDefaultValue0level {
 
