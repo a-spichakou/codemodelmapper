@@ -1,5 +1,10 @@
 package github.compile.mapper.source;
 
+import github.compile.mapper.test1.InnerTargetClass1;
+import github.compile.mapper.test1.InnerTargetClass2;
+import github.compile.mapper.test1.SourceObject;
+import github.compile.mapper.test1.TargetObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;

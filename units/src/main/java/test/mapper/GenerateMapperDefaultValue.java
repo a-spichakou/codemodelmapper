@@ -1,10 +1,10 @@
 
 package test.mapper;
 
-import github.compile.mapper.source.InnerTargetClass1;
-import github.compile.mapper.source.InnerTargetClass2;
-import github.compile.mapper.source.SourceObject;
-import github.compile.mapper.source.TargetObject;
+import github.compile.mapper.test1.InnerTargetClass1;
+import github.compile.mapper.test1.InnerTargetClass2;
+import github.compile.mapper.test1.SourceObject;
+import github.compile.mapper.test1.TargetObject;
 
 public class GenerateMapperDefaultValue {
 

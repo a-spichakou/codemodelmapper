@@ -1,11 +1,12 @@
 
 package test.mapper;
 
-import github.compile.mapper.source.InnerSourceClass1;
-import github.compile.mapper.source.InnerSourceClass2;
-import github.compile.mapper.source.InnerTargetClass1;
-import github.compile.mapper.source.SourceObject;
-import github.compile.mapper.source.TargetObject;
+import github.compile.mapper.test1.InnerSourceClass1;
+import github.compile.mapper.test1.InnerSourceClass2;
+import github.compile.mapper.test1.InnerTargetClass1;
+import github.compile.mapper.test1.SourceObject;
+import github.compile.mapper.test1.TargetObject;
+
 
 public class GenerateMapperComplex0 {
 

@@ -1,5 +1,8 @@
-package test.tree;
+package test.mapper;
 
+import github.compile.mapper.test.Source;
+import github.compile.mapper.test.Target;
+import github.compile.mapper.test.TargetLevel1;
 import junit.framework.TestCase;
 
 public class BuildTestTreeComplex1levelTest extends TestCase{

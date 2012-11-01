@@ -1,4 +1,7 @@
-package test.tree;
+package test.mapper;
+
+import github.compile.mapper.test.Source;
+import github.compile.mapper.test.Target;
 
 import java.util.ArrayList;
 import java.util.Date;

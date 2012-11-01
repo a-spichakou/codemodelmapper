@@ -1,4 +1,4 @@
-package github.compile.mapper.source;
+package github.compile.mapper.test1;
 
 public class InnerSourceClass2 {
 

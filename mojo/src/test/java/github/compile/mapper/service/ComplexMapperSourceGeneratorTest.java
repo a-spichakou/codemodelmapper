@@ -5,12 +5,12 @@ import github.compile.mapper.mapping.MappingDefinitions;
 import github.compile.mapper.mapping.PathNode;
 import github.compile.mapper.mapping.SimpleMappingDefinition;
 import github.compile.mapper.source.ComplexSourcePathNodeType;
-import github.compile.mapper.source.InnerSourceClass1;
-import github.compile.mapper.source.InnerSourceClass2;
-import github.compile.mapper.source.InnerTargetClass1;
-import github.compile.mapper.source.InnerTargetClass2;
-import github.compile.mapper.source.SourceObject;
-import github.compile.mapper.source.TargetObject;
+import github.compile.mapper.test1.InnerSourceClass1;
+import github.compile.mapper.test1.InnerSourceClass2;
+import github.compile.mapper.test1.InnerTargetClass1;
+import github.compile.mapper.test1.InnerTargetClass2;
+import github.compile.mapper.test1.SourceObject;
+import github.compile.mapper.test1.TargetObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +24,10 @@ import junit.framework.TestCase;
 public class ComplexMapperSourceGeneratorTest extends TestCase{
 
 	private static final String TEST_PACKAGE = "test.mapper.";
-	private static final String PATH_TO_PUT = "./src/test/java";
+	/**
+	 * Have to put generate mappers to special Maven module
+	 */
+	private static final String PATH_TO_PUT = "../unit/src/test/java";
 	
 	public void testGenerateMapperComplex0() {
 		final MapperSourceGenerator generator = new MapperSourceGenerator(TEST_PACKAGE + "GenerateMapperComplex0", SourceObject.class, TargetObject.class);

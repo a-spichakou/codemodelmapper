@@ -1,11 +1,15 @@
 
-package test.tree;
+package test.mapper;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import github.compile.mapper.source.Utils;
+import github.compile.mapper.test.Source;
+import github.compile.mapper.test.SourceLevel1;
+import github.compile.mapper.test.Target;
+import github.compile.mapper.test.TargetLevel1;
 
 public class BuildTestTreeSimple1level {
 

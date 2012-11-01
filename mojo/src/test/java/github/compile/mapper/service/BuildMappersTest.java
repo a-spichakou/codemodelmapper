@@ -1,7 +1,9 @@
-package test.tree;
+package github.compile.mapper.service;
 
 import github.compile.mapper.mapping.MappingDefinitions;
 import github.compile.mapper.service.MapperSourceGenerator;
+import github.compile.mapper.test.Source;
+import github.compile.mapper.test.Target;
 
 import java.io.File;
 
@@ -11,8 +13,8 @@ import com.sun.codemodel.JCodeModel;
 import com.thoughtworks.xstream.XStream;
 
 public class BuildMappersTest extends TestCase{
-	private static final String PATH_TO_PUT = "./src/test/java";
-	/*
+	private static final String PATH_TO_PUT = "../unit/src/test/java";
+	
 	public void testBuildTestTreeDefaultValue0level()
 	{
 		final XStream xstream = new XStream();
@@ -82,7 +84,7 @@ public class BuildMappersTest extends TestCase{
 			ex.printStackTrace();
 		}
 	}
-	*/
+	
 	public void testBuildTestTreeSimple1level()
 	{
 		final XStream xstream = new XStream();
