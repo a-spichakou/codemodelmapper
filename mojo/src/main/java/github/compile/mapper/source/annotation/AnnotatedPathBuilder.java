@@ -24,11 +24,10 @@ public class AnnotatedPathBuilder {
 
 	private Map<String, List<PathNode>> mappingSource = new HashMap<String, List<PathNode>>();
 	private Map<String, List<PathNode>> mappingTarget = new HashMap<String, List<PathNode>>();
-	
-	public AnnotatedPathBuilder(String path2config)
-	{
+
+	public AnnotatedPathBuilder(String path2config) {
 		final XStream xstream = new XStream();
-		config = (AnnotatedPathConfig)xstream.fromXML(getClass().getResourceAsStream(path2config));
+		config = (AnnotatedPathConfig) xstream.fromXML(getClass().getResourceAsStream(path2config));
 	}
 
 	public MappingDefinitions build(Class<?> source, Class<?> target) {
@@ -45,10 +44,10 @@ public class AnnotatedPathBuilder {
 			final List<PathNode> sourcePath = mappingSource.get(key);
 			final List<PathNode> targetPath = entry.getValue();
 
-			final IMappingDefinition definitionByIndex = config.getDefinitionByIndex(key);
-			if(definitionByIndex==null)
-			{
-				continue;
+			IMappingDefinition definitionByIndex = config.getDefinitionByIndex(key);
+			if (definitionByIndex == null) {
+				// Create default mapping definition
+				definitionByIndex = new SimpleMappingDefinition();
 			}
 			if (definitionByIndex instanceof SimpleMappingDefinition) {
 				((SimpleMappingDefinition) definitionByIndex).setSourcePath(sourcePath);
@@ -63,11 +62,11 @@ public class AnnotatedPathBuilder {
 	private void extactPath(Class<?> clazz, Map<String, List<PathNode>> mapping, boolean isSource) {
 		final Method[] methods = clazz.getMethods();
 		for (Method method : methods) {
-			final Annotation annotation = getAnnotation(isSource, method);			
+			final Annotation annotation = getAnnotation(isSource, method);
 			if (annotation == null) {
 				continue;
-			}			
-			final String index = getIndex(isSource, annotation);			
+			}
+			final String index = getIndex(isSource, annotation);
 			List<PathNode> list = mapping.get(index);
 
 			if (list == null) {
@@ -76,24 +75,21 @@ public class AnnotatedPathBuilder {
 			}
 			final PathNode pathNode = new PathNode();
 			list.add(pathNode);
-			
-			final ComplexSourcePathNodeType type = getType(isSource, annotation);			
+
+			final ComplexSourcePathNodeType type = getType(isSource, annotation);
 			pathNode.setType(type.getType());
-			
+
 			Class<?> returnType = null;
-			if(type!=ComplexSourcePathNodeType.SIMPLE)
-			{
-				final String complexParam = getComplexParam(isSource, annotation);				
-				pathNode.setComplexParam(complexParam);	
-				returnType = getClass(isSource, annotation);				
+			if (type != ComplexSourcePathNodeType.SIMPLE) {
+				final String complexParam = getComplexParam(isSource, annotation);
+				pathNode.setComplexParam(complexParam);
+				returnType = getClass(isSource, annotation);
+			} else {
+				returnType = method.getReturnType();
 			}
-			else
-			{
-				returnType = method.getReturnType();										
-			}
-						
+
 			pathNode.setClazz(getFullClassName(returnType));
-			
+
 			final String name = method.getName();
 			final String replaceFirst = name.replaceFirst("get", "");
 			final String field = replaceFirst.substring(0, 1).toLowerCase() + replaceFirst.substring(1);
@@ -104,50 +100,48 @@ public class AnnotatedPathBuilder {
 			}
 		}
 	}
-	
-	private String getFullClassName(Class<?> clazz)
-	{
-		return clazz.getPackage() + "." + clazz.getName();
+
+	private String getFullClassName(Class<?> clazz) {
+		Class<?> clazz2convert = clazz;
+		if (ClassUtils.isPrimitiveOrWrapper(clazz)) {
+			clazz2convert = ClassUtils.primitiveToWrapper(clazz);			
+		}		
+		return clazz2convert.getName();
 	}
-	
-	private Class<?> getClass(boolean isSource, Annotation annotation)
-	{
+
+	private Class<?> getClass(boolean isSource, Annotation annotation) {
 		if (isSource) {
 			return ((SourceMappingAnnotation) annotation).exactClass();
 		} else {
 			return ((TargetMappingAnnotation) annotation).exactClass();
 		}
 	}
-	
-	private Annotation getAnnotation(boolean isSource, Method method)
-	{
+
+	private Annotation getAnnotation(boolean isSource, Method method) {
 		if (isSource) {
 			return method.getAnnotation(SourceMappingAnnotation.class);
 		} else {
 			return method.getAnnotation(TargetMappingAnnotation.class);
-		}		
+		}
 	}
-	
-	private String getIndex(boolean isSource, Annotation annotation)
-	{
+
+	private String getIndex(boolean isSource, Annotation annotation) {
 		if (isSource) {
 			return ((SourceMappingAnnotation) annotation).index();
 		} else {
 			return ((TargetMappingAnnotation) annotation).index();
 		}
 	}
-	
-	private String getComplexParam(boolean isSource, Annotation annotation)
-	{
+
+	private String getComplexParam(boolean isSource, Annotation annotation) {
 		if (isSource) {
 			return ((SourceMappingAnnotation) annotation).complexParam();
 		} else {
 			return ((TargetMappingAnnotation) annotation).complexParam();
 		}
 	}
-	
-	private ComplexSourcePathNodeType getType(boolean isSource, Annotation annotation)
-	{
+
+	private ComplexSourcePathNodeType getType(boolean isSource, Annotation annotation) {
 		if (isSource) {
 			return ((SourceMappingAnnotation) annotation).type();
 		} else {

@@ -1,0 +1,14 @@
+<github.compile.mapper.source.annotation.AnnotatedPathConfig>
+  <pathConfigMap>
+    <entry>
+      <string>level0String</string>
+      <github.compile.mapper.mapping.DefaultValueMappingDefinition>
+        <defaultValue class="string">dafultValue</defaultValue>
+      </github.compile.mapper.mapping.DefaultValueMappingDefinition>
+    </entry>
+    <entry>
+      <string>level0primitive</string>
+      <github.compile.mapper.mapping.SimpleMappingDefinition/>
+    </entry>
+  </pathConfigMap>
+</github.compile.mapper.source.annotation.AnnotatedPathConfig>
