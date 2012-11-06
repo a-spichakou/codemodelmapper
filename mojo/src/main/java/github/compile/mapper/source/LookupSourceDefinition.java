@@ -17,7 +17,7 @@ import com.sun.codemodel.JVar;
 public class LookupSourceDefinition extends AbstractSourceDefinition {
 	private static final String LOOKUP_VALUE_METHOD_NAME = "lookup";
 	private static final String LOOKUP_VALUE_MEMBER_NAME = "lookup";
-	private Class lookupClass;
+	private Class<?> lookupClass;
 	private Method lookupMethod;
 
 	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
@@ -64,11 +64,11 @@ public class LookupSourceDefinition extends AbstractSourceDefinition {
 		jmethod.body()._return(invoke);
 	}
 	
-	public Class getLookupClass() {
+	public Class<?> getLookupClass() {
 		return lookupClass;
 	}
 
-	public void setLookupClass(Class lookupClass) {
+	public void setLookupClass(Class<?> lookupClass) {
 		this.lookupClass = lookupClass;
 	}
 

@@ -1,6 +1,5 @@
 package github.compile.mapper.source;
 
-import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,8 +38,8 @@ public class PathConverterSourceParam implements IConverterSourceParam {
 		while (iterator.hasNext()) {
 			final SourcePathNode node = iterator.next();
 
-			final Class clazz = node.getClazz();
-			final Method method = node.getGetMethod();
+			final Class<?> clazz = node.getClazz();
+			//final Method method = node.getGetMethod();
 
 			final JClass directClass = codeModel.ref(clazz);
 			final String simpleClassName = clazz.getSimpleName();

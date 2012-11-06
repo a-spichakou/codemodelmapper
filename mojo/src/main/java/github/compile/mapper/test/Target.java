@@ -1,5 +1,7 @@
 package github.compile.mapper.test;
 
+import github.compile.mapper.source.annotation.TargetMappingAnnotation;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,14 +26,16 @@ public class Target {
 
 	private TargetLevel1 level1;
 
+	@TargetMappingAnnotation(index="level0primitive")
 	public int getLevel0primitive() {
 		return level0primitive;
 	}
-
+	
 	public void setLevel0primitive(int level0primitive) {
 		this.level0primitive = level0primitive;
 	}
 
+	@TargetMappingAnnotation(index="level0String")
 	public String getLevel0String() {
 		return level0String;
 	}

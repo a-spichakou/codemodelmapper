@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>unit</groupId>
 	<artifactId>github.compile.units</artifactId>
+	<name>Codemodel mapper Unit tests</name>
 	<parent>
 		<groupId>mapper</groupId>
 		<artifactId>github.compile.mapper</artifactId>

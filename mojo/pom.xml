@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mojo</groupId>
 	<artifactId>github.compile.mojo</artifactId>
+	<name>Codemodel mapper Mojo</name>
 	<parent>
 		<groupId>mapper</groupId>
 		<artifactId>github.compile.mapper</artifactId>

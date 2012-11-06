@@ -29,8 +29,8 @@ import java.util.List;
  * 
  */
 public class SourceDefinitionFactory {
-	private Class source;
-	private Class target;
+	private Class<?> source;
+	private Class<?> target;
 
 	/**
 	 * 
@@ -39,7 +39,7 @@ public class SourceDefinitionFactory {
 	 * @param target
 	 *            - target class object
 	 */
-	public SourceDefinitionFactory(Class source, Class target) {
+	public SourceDefinitionFactory(Class<?> source, Class<?> target) {
 		this.source = source;
 		this.target = target;
 	}
@@ -140,7 +140,7 @@ public class SourceDefinitionFactory {
 		return null;
 	}
 
-	private List<SourcePathNode> buildSourcePath(List<PathNode> path, Class rootClass) throws ClassNotFoundException {
+	private List<SourcePathNode> buildSourcePath(List<PathNode> path, Class<?> rootClass) throws ClassNotFoundException {
 		final List<SourcePathNode> sourcePath = new ArrayList<SourcePathNode>();
 
 		Class<?> prevClass = null;

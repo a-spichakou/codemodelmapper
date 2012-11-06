@@ -1,11 +1,13 @@
 package github.compile.mapper.test;
 
+import github.compile.mapper.source.annotation.SourceMappingAnnotation;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 public class Source {
-
+	
 	private int level0primitive;
 	private String level0String;
 	private Date level0Complex;
@@ -21,6 +23,7 @@ public class Source {
 	
 	private SourceLevel1 level1;
 
+	@SourceMappingAnnotation(index="level0primitive")
 	public int getLevel0primitive() {
 		return level0primitive;
 	}

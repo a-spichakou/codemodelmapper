@@ -1,6 +1,5 @@
 package github.compile.mapper.source;
 
-import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JExpressionImpl;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
-import com.sun.codemodel.JMod;
 import com.sun.codemodel.JVar;
 
 /**
@@ -59,8 +57,8 @@ public abstract class AbstractSourceDefinition implements ISourceDefinition {
 		while (iterator.hasNext()) {
 			final SourcePathNode node = iterator.next();
 
-			final Class clazz = node.getClazz();
-			final Method method = node.getGetMethod();
+			final Class<?> clazz = node.getClazz();
+			//final Method method = node.getGetMethod();
 
 			final JClass directClass = codeModel.ref(clazz);
 			final String simpleClassName = clazz.getSimpleName();
@@ -110,8 +108,8 @@ public abstract class AbstractSourceDefinition implements ISourceDefinition {
 				break;
 			}
 
-			final Class clazz = node.getClazz();
-			final Method method = node.getGetMethod();
+			final Class<?> clazz = node.getClazz();
+			//final Method method = node.getGetMethod();
 
 			final JClass directClass = codeModel.ref(clazz);
 			final String simpleClassName = clazz.getSimpleName();

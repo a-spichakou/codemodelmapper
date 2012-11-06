@@ -31,7 +31,7 @@ public class SourcePathNode {
 	/**
 	 * Object type
 	 */
-	private Class clazz;
+	private Class<?> clazz;
 	/**
 	 * Setter form Parent class
 	 */
@@ -321,11 +321,11 @@ public class SourcePathNode {
 		return literalByValue;
 	}
 	
-	public Class getClazz() {
+	public Class<?> getClazz() {
 		return clazz;
 	}
 
-	public void setClazz(Class clazz) {
+	public void setClazz(Class<?> clazz) {
 		this.clazz = clazz;
 	}
 

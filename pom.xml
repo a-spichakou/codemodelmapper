@@ -5,6 +5,7 @@
 	<artifactId>github.compile.mapper</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>Codemodel mapper</name>
 	<modules>
 		<module>mojo</module>
 		<module>units</module>

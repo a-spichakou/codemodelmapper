@@ -24,11 +24,11 @@ public class MapperSourceGenerator {
 	/**
 	 * Source class
 	 */
-	private Class source;
+	private Class<?> source;
 	/**
 	 * Target class
 	 */
-	private Class target;
+	private Class<?> target;
 	/**
 	 * Name for generating file
 	 */
@@ -40,7 +40,7 @@ public class MapperSourceGenerator {
 	 * @param source - source class
 	 * @param target - target class
 	 */
-	public MapperSourceGenerator(String fullClassName, Class source, Class target) {
+	public MapperSourceGenerator(String fullClassName, Class<?> source, Class<?> target) {
 		this.fullClassName = fullClassName;
 		this.source = source;
 		this.target = target;

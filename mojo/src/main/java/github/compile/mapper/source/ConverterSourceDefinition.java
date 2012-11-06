@@ -20,7 +20,7 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 	private static final String CONVERTER_PARAM_METHOD_NAME = "getParam";
 	private static final String CONVERTER_CONVERT_METHOD_NAME = "convert";
 	private static final String CONVERTER_VALUE_MEMBER_NAME = "converter";
-	private Class converterClass;
+	private Class<?> converterClass;
 	private Method converterMethod;
 
 	private List<IConverterSourceParam> converterSourceParams;
@@ -103,11 +103,11 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 		getParams.body()._return(paramsList);
 	}
 	
-	public Class getConverterClass() {
+	public Class<?> getConverterClass() {
 		return converterClass;
 	}
 
-	public void setConverterClass(Class converterClass) {
+	public void setConverterClass(Class<?> converterClass) {
 		this.converterClass = converterClass;
 	}
 
