@@ -1,0 +1,19 @@
+How Codemodel Mapper framework works
+	
+	The main idea of this framework is following. As real use case you have 2 hierarchical trees of
+	POJOs or Java Beans. You need to create (or copy) one tree (target) from second (source).
+	That means you can say, that values in target model can be set by specified path (for example: Target.setN(setM(Source.getA().getB()))) 
+	from source model's values. So, Codemodel Mapper framework generates for you such kind of code by annotated methods.
+	
+	Each mapping "path" is chain of getters marked by unique "index". Framework will get all chains, group it and generates separate Java class - mapper - 
+	one per pair source-target model.
+	This mapper will contain code with number of methods - getters that extract value from source model and setters that set value to target model.
+	
+	I.e. you need to:
+	
+	* Specify root of source model and target model
+	
+	* Specify getters in source and target model trees
+	
+	* Generate code
+	

@@ -1,5 +1,7 @@
 Mapping examples
 
+	All examples based on sample project available {{{https://github.com/a-spichakou/codemodelmapper/tree/master/example}here}}
+				
 	* {{{./simple_mapping.html}Simple mapping}}
 	
 	* {{{./default_value_mapping.html}Mapping by default value}}

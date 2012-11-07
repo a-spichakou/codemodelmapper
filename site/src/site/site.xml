@@ -23,6 +23,7 @@
     </menu>
     <menu name="Documentation">
       <!-- Standalone item -->
+      <item name="How it works" href="/how_it_works.html" />
       <item name="Maven configuration" href="/maven_configuration.html" />
       <item name="Examples" href="/examples.html" />
     </menu>

@@ -1,6 +1,6 @@
 Codemodel Mapper Framework
 
-	Codemodel Mapper Framework is Java framework that allows generates bridges between models.
+	Codemodel Mapper Framework is Java framework that allow generates bridges between models.
 	Typical use case is following.
 	
 	For example in you project you need to interact with 3d-part systems - invoke legacy systems or expose web-services. 
@@ -27,6 +27,10 @@ Development status
 	*Mapping with custom lookups
 	
 	*Mapping static values
+
+How it works
+	
+	See separate page with expanded description {{{./how_it_works.html}here}}
 
 Source code
 

@@ -6,10 +6,8 @@
 	</properties>
 	<body>
 		<section name="Case">
-			<p>Case</p>
 			<p>You have 2 classes: Source.java with level0primitive field and
-				Target.java with level0primitive (take a look into example project, available
-				<a href="https://github.com/a-spichakou/codemodelmapper/tree/master/example">here</a>)
+				Target.java with level0primitive.
 				You need to copy value from
 				Source.level0primitive to
 				Target.level0primitive.</p>
@@ -48,6 +46,11 @@ public int getLevel0primitive() {
 			<p>Next step - Maven configuration. There is typical configuration:
 			</p>
 			<a href="maven_configuration.html">Maven configuration</a>
+		</section>
+		<section name="Build">
+			<p>After build under path, specified in Maven configuration you will find new Java class - mapper.
+			It can be used in your project as utility class.
+			</p>
 		</section>
 	</body>
 </document>

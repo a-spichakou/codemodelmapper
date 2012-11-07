@@ -1,0 +1,20 @@
+Path annotations
+
+	Codemodel Mapper framework need to know how to reach source and target variable in model tree.
+	Typically model contains root object that should be marked as @MapTo annotation. And "path" throght
+	nodes to source or target should be marked by @SourceMappingAnnotation or @TargetMappingAnnotation.
+
+Annotations params
+
+	@SourceMappingAnnotation and @TargetMappingAnnotation have the same params
+	
+	* index.  This index should be the same for one Path (both source and target path). 
+	Framework uses this index to build full path from/to source/target.
+	
+	* type. Node type. Can be value of enum ComplexSourcePathNodeType: simple/array/list/map
+	
+	* complexParam. Complex param or default value.
+	
+	* exactClass. Class that identifies what kind of objects are in array/list or map in values()
+	
+	
