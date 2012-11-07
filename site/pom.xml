@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>mapper</groupId>
 	<artifactId>github.compile.site</artifactId>
-	<name>Codemodel Mapper</name>
+	<name>Codemodel mapper documentation</name>
 	<description>Codemodel Mapper is model to model Java-based mapping framework</description>
 	<distributionManagement>
 		<site>

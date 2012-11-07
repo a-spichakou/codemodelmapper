@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Codemodel Mapper">
+
+  <!-- Page Title -->
+  <bannerLeft>
+    <name>Codemodel Mapper</name>
+    <src>https://github.com/a-spichakou/codemodelmapper</src>
+    <href>http://codemodelmapper.sourceforge.net/</href>
+  </bannerLeft>
+  <body>
+
+    <!-- Links defined across the top right of the site -->
+    <links>
+      <item name="Maven" href="http://maven.apache.org/" />
+    </links>
+
+    <!-- Menu in the Left Navigation -->
+    <menu name="About">
+      <!-- Standalone item -->
+      <item name="About" href="/index.html" />
+      <item name="Source" href="https://github.com/a-spichakou/codemodelmapper" />
+      <item name="License" href="/license.html" />
+    </menu>
+    <menu name="Documentation">
+      <!-- Standalone item -->
+      <item name="Maven configuration" href="/maven_configuration.html" />
+      <item name="Examples" href="/examples.html" />
+    </menu>
+    ${reports}
+  </body>
+</project>

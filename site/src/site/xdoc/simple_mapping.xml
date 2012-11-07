@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<properties>
+		<title>Simple mapping</title>
+	</properties>
+	<body>
+		<section name="Case">
+			<p>Case</p>
+			<p>You have 2 classes: Source.java with level0primitive field and
+				Target.java with level0primitive
+				You need to copy value from
+				Source.level0primitive to
+				Target.level0primitive.</p>
+
+		</section>
+		<section name="HowTo">
+			<p>First of all you need to mark Source class as root of your source
+				model. It can be done by annotation @MapTo
+			</p>
+			<source>
+<![CDATA[	
+@MapTo(path2config="/MapConfig.xml",target=Target.class,mapperClassNameWithPackage="github.compile.mapper.test.MapSource2Target")
+public class Source {
+]]>
+			</source>
+			<p>
+				Next step - mark getters in Source and Target classes:
+			</p>
+			<source>
+<![CDATA[	
+@SourceMappingAnnotation(index="level0primitive")
+public int getLevel0primitive() {
+	return level0primitive;
+}
+]]>
+			</source>
+			<source>
+<![CDATA[	
+@TargetMappingAnnotation(index="level0primitive")
+public int getLevel0primitive() {
+	return level0primitive;
+}]]>
+			</source>
+		</section>
+		<section name="Maven">
+			<p>Next step - Maven configuration. There is typical configuration:
+			</p>
+			<a href="maven_configuration.html">Maven configuration</a>
+		</section>
+	</body>
+</document>

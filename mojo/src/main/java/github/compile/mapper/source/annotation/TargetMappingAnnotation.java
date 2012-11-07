@@ -4,7 +4,11 @@ import github.compile.mapper.source.ComplexSourcePathNodeType;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
+/**
+ * By this annotation developer should mark target Get method
+ * @author aliaksandr_spichakou
+ *
+ */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TargetMappingAnnotation {
 	String index();	

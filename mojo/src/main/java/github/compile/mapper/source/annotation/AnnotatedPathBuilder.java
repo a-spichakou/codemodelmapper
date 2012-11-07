@@ -19,17 +19,32 @@ import org.apache.commons.lang3.ClassUtils;
 
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Builder mapping code from annotated source
+ * @author aliaksandr_spichakou
+ *
+ */
 public class AnnotatedPathBuilder {
 	private AnnotatedPathConfig config;
 
 	private Map<String, List<PathNode>> mappingSource = new HashMap<String, List<PathNode>>();
 	private Map<String, List<PathNode>> mappingTarget = new HashMap<String, List<PathNode>>();
 
+	/**
+	 * Constructor
+	 * @param path2config - path where to store generated files
+	 */
 	public AnnotatedPathBuilder(String path2config) {
 		final XStream xstream = new XStream();
 		config = (AnnotatedPathConfig) xstream.fromXML(getClass().getResourceAsStream(path2config));
 	}
 
+	/**
+	 * Build mapping definitions
+	 * @param source - source class object
+	 * @param target - target source object
+	 * @return
+	 */
 	public MappingDefinitions build(Class<?> source, Class<?> target) {
 		extactPath(source, mappingSource, true);
 		extactPath(target, mappingTarget, false);
@@ -59,6 +74,12 @@ public class AnnotatedPathBuilder {
 		return definitions;
 	}
 
+	/**
+	 * Extracting path from annotations
+	 * @param clazz
+	 * @param mapping
+	 * @param isSource
+	 */
 	private void extactPath(Class<?> clazz, Map<String, List<PathNode>> mapping, boolean isSource) {
 		final Method[] methods = clazz.getMethods();
 		for (Method method : methods) {

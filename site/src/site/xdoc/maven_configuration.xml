@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<properties>
+		<title>Maven configuration</title>
+	</properties>
+	<body>
+		<section name="Maven">
+			<p>There is typical configuration:</p>
+			<source>
+<![CDATA[	
+<profiles>
+...
+	<profile>
+		<id>build-mappers</id>
+		<activation>
+			<property>
+				<name>build-mappers</name>
+			</property>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.2.1</version>
+					<executions>
+						<execution>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>java</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<mainClass>github.compile.mapper.maven.CodemodelExec</mainClass>
+						<executable>maven</executable>
+						<workingDirectory>/tmp</workingDirectory>
+						<arguments>
+							<argument>./src/main/java</argument>
+							<argument>github.compile.example</argument>
+						</arguments>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+	....
+</profiles>]]>
+			</source>
+			<p>There are 2 required params:</p>
+			<ul>
+				<li>First (./src/main/java) - path where to save generated classes</li>
+				<li>Second (github.compile.example) - java package where to search marked by @MapTo annotation source classes</li>
+			</ul>
+		</section>
+	</body>
+</document>

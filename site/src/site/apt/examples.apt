@@ -1,0 +1,12 @@
+Mapping examples
+
+	* {{{./simple_mapping.html}Simple mapping}}
+	
+	* {{{./default_value_mapping.html}Mapping by default value}}
+	
+	* {{{./converter_mapping.html}Mapping with converter}}
+	
+	* {{{./lookup_mapping.html}Mapping with lookups}}
+	
+	* {{{./complex_mapping.html}Complex mapping from/to array/list/map}}
+	

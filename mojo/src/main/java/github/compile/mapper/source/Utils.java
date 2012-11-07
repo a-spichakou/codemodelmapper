@@ -8,14 +8,30 @@ import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JInvocation;
 
+/**
+ * Utilites
+ * @author aliaksandr_spichakou
+ *
+ */
 public class Utils {
 
+	/**
+	 * Init list by null
+	 * @param list
+	 * @param size
+	 */
 	public static void initList(List list, int size) {
 		for (int i = 0; i < size; i++) {
 			list.add(null);
 		}
 	}
 
+	/**
+	 * Detect Codemodel java type by Object value
+	 * @param codeModel
+	 * @param value
+	 * @return
+	 */
 	public static JExpression getLiteralByValue(JCodeModel codeModel, Object value)
 	{
 		if(value instanceof Integer)

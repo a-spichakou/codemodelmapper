@@ -1,0 +1,10 @@
+Annotation @MapTo
+
+	There are @MapTo annotation parameters description
+	
+	* target - Class which is target of mapping
+	
+	* path2config - Path to XML config with complex params (like converters or mapping from/to arrays/lis/maps)
+	
+	* mapperClassNameWithPackage - Class name for Mapper that will be generated
+	
