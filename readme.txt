@@ -1,6 +1,7 @@
 CODE MODEL MAPPING FRAMEWORK
 
-Site avaliable here http://codemodelmapper.sourceforge.net/
+
+Site available here http://codemodelmapper.sourceforge.net/
 
 Codemodel Mapper Framework is Java framework that allows generate bridges between models.
 Typical use case is following.
