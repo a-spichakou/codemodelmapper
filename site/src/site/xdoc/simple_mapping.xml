@@ -8,7 +8,8 @@
 		<section name="Case">
 			<p>Case</p>
 			<p>You have 2 classes: Source.java with level0primitive field and
-				Target.java with level0primitive
+				Target.java with level0primitive (take a look into example project, available
+				<a href="https://github.com/a-spichakou/codemodelmapper/tree/master/example">here</a>)
 				You need to copy value from
 				Source.level0primitive to
 				Target.level0primitive.</p>
