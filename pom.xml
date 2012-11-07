@@ -11,5 +11,6 @@
 		<module>units</module>		
 		<module>maven</module>
 		<module>example</module>
+		<module>site</module>
 	</modules>
 </project>
