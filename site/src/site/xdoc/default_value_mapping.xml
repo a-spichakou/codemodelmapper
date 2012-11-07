@@ -2,14 +2,14 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 	<properties>
-		<title>Simple mapping</title>
+		<title>Default value mapping</title>
 	</properties>
 	<body>
 		<section name="Case">
-			<p>You have 2 classes: Source.java with level0primitive field and
-				Target.java with level0primitive.
-				You need to copy value from
-				Source.level0primitive to
+			<p>You have 2 classes: Source.java and
+				Target.java with
+				level0primitive.
+				You need to set constant value to
 				Target.level0primitive.</p>
 
 		</section>
@@ -24,43 +24,42 @@ public class Source {
 ]]>
 			</source>
 			<p>
-				Next step - mark getters in Source and Target classes:
+				Next step - mark getter (it is little bit wired but please, let
+				leave it as it is :) in Target class:
 			</p>
 			<source>
 <![CDATA[	
-@SourceMappingAnnotation(index="level0primitive")
-public int getLevel0primitive() {
-	return level0primitive;
-}
-]]>
-			</source>
-			<source>
-<![CDATA[	
-@TargetMappingAnnotation(index="level0primitive")
-public int getLevel0primitive() {
-	return level0primitive;
+@TargetMappingAnnotation(index="level0String")
+public String getLevel0String() {
+	return level0String;
 }]]>
 			</source>
 		</section>
 		<section name="Config">
 			<p>Now we need to create configuration where we should put default
 				value.
-				So, go to src/main/resource under your Maven project and
-				create XML
+				So, go to src/main/resource under your Maven project and create XML
 				file (with name MapConfig.xml) with content:
 		</p>
 			<source>
 <![CDATA[	
 <github.compile.mapper.source.annotation.AnnotatedPathConfig>
   <pathConfigMap>
+    <entry>
+    <!-- Index needed to group target path chain -->
+      <string>level0String</string>
+      <!-- Mapping definition with default value string -->
+      <github.compile.mapper.mapping.DefaultValueMappingDefinition>
+        <defaultValue class="string">dafultValue</defaultValue>
+      </github.compile.mapper.mapping.DefaultValueMappingDefinition>
+    </entry>
   </pathConfigMap>
 </github.compile.mapper.source.annotation.AnnotatedPathConfig>
 ]]>
 			</source>
 			<p>
-				Format of this file described
-				<a href="annotated_path_config.html">here</a>
-			</p>
+				Format of this file described <a href="annotated_path_config.html">here</a>
+		</p>
 		</section>
 		<section name="Maven">
 			<p>Next step - Maven configuration. There is typical configuration:
@@ -70,7 +69,9 @@ public int getLevel0primitive() {
 		<section name="Build">
 			<p>After build under path, specified in Maven configuration you will
 				find new Java class - mapper.
-				It can be used in your project as utility class.
+				It can be used in your project as
+				utility class. It will set "defaultValue" to
+				field level0String.
 			</p>
 		</section>
 	</body>

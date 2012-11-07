@@ -11,7 +11,7 @@
 
     <!-- Links defined across the top right of the site -->
     <links>
-      <item name="Maven" href="http://maven.apache.org/" />
+      <item name="Contact" href="https://sourceforge.net/p/codemodelmapper/tickets/" />
     </links>
 
     <!-- Menu in the Left Navigation -->
@@ -24,6 +24,8 @@
     <menu name="Documentation">
       <!-- Standalone item -->
       <item name="How it works" href="/how_it_works.html" />
+      <item name="Annotated path config" href="/annotated_path_config.html" />
+      <item name="Annotation description" href="/mapping_annotation.html" />
       <item name="Maven configuration" href="/maven_configuration.html" />
       <item name="Examples" href="/examples.html" />
     </menu>

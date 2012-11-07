@@ -1,0 +1,14 @@
+Annotated Path Config
+
+	Annotated path config is XML file, contains data from serialized class AnnotatedPathConfig.
+	It needs to 
+	
+	* Define values in case mapping to constants
+	
+	* Define params in case mapping from/to array/list/map
+	
+	* Define converters and lookup classes in case map with converters or/and lookups
+	
+	Take a look of implementation IMappingDefinition interface and examples.
+	Serialization can be done with {{{http://xstream.codehaus.org/}XStream}} framework. And actually this config on runtime simple 
+	loads with it. 
