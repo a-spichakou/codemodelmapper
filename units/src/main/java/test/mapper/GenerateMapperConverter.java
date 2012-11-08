@@ -21,13 +21,13 @@ public class GenerateMapperConverter {
         mapTarget00();
     }
 
-    public List getParam() {
+    public List mapTargetGetParam() {
         List params = new ArrayList();
-        params.add(getParam_0());
+        params.add(GetParam_0());
         return params;
     }
 
-    public Object getParam_0() {
+    public Object GetParam_0() {
         String string0;
         string0 = source.getParam1();
         if ((string0==null)) {
@@ -36,7 +36,7 @@ public class GenerateMapperConverter {
         return string0;
     }
 
-    public String convert() {
+    public String mapTargetConvert() {
         if ((converter==null)) {
             return null;
         }
@@ -44,8 +44,7 @@ public class GenerateMapperConverter {
         value = getValue();
         String valueCasted;
         valueCasted = ((String) value);
-        converter.convert(valueCasted, getParam());
-        return converter.convert(valueCasted, getParam());
+        return converter.convert(valueCasted, mapTargetGetParam());
     }
 
     public Object getValue() {
@@ -82,7 +81,7 @@ public class GenerateMapperConverter {
         }
         String value;
         String decl;
-        value = convert();
+        value = mapTargetConvert();
         decl = ((String) value);
         innertargetclass21 .setTg3(decl);
     }

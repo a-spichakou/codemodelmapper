@@ -1,7 +1,6 @@
 package github.compile.example;
 
 import github.compile.mapper.source.annotation.TargetMappingAnnotation;
-import github.compile.mapper.test.TargetLevel1;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,6 +100,7 @@ public class Target {
 		this.level0Map = level0Map;
 	}
 
+	@TargetMappingAnnotation(index="level0Complex")
 	public TargetLevel1 getLevel1() {
 		return level1;
 	}

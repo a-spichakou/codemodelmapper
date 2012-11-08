@@ -1,5 +1,6 @@
 package github.compile.mapper.service;
 
+import github.compile.mapper.mapping.AbstractConverterParam;
 import github.compile.mapper.mapping.ConverterMappingDefinition;
 import github.compile.mapper.mapping.DefaultValueMappingDefinition;
 import github.compile.mapper.mapping.IConverterParam;
@@ -17,6 +18,7 @@ import github.compile.mapper.source.LookupSourceDefinition;
 import github.compile.mapper.source.PathConverterSourceParam;
 import github.compile.mapper.source.SimpleSourceDefinition;
 import github.compile.mapper.source.SourcePathNode;
+import github.compile.mapper.source.WrappedAbstractConverterSourceParam;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -131,6 +133,12 @@ public class SourceDefinitionFactory {
 					final PathConverterSourceParam pathConverterSourceParam = new PathConverterSourceParam();
 					pathConverterSourceParam.setSourcePath(paramSourcePath);
 					converterSourceParams.add(pathConverterSourceParam);
+				}
+				else if (param instanceof AbstractConverterParam)
+				{
+					final WrappedAbstractConverterSourceParam abstractConverterSourceParam = new WrappedAbstractConverterSourceParam();
+					abstractConverterSourceParam.setContainer((AbstractConverterParam)param);
+					converterSourceParams.add(abstractConverterSourceParam);
 				}
 			}
 			codemodel.setConverterSourceParams(converterSourceParams);

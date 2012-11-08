@@ -1,5 +1,8 @@
 package github.compile.example;
 
+import github.compile.mapper.source.ComplexSourcePathNodeType;
+import github.compile.mapper.source.annotation.TargetMappingAnnotation;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +45,7 @@ public class TargetLevel1 {
 		this.level1Complex = level1Complex;
 	}
 
+	@TargetMappingAnnotation(index="level0Complex",complexParam="2",exactClass=Integer.class,type=ComplexSourcePathNodeType.ARRAY)
 	public int[] getLevel1primitiveArray() {
 		return level1primitiveArray;
 	}

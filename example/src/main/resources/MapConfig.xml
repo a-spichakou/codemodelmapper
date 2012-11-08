@@ -1,14 +1,26 @@
 <github.compile.mapper.source.annotation.AnnotatedPathConfig>
-  <pathConfigMap>
-    <entry>
-      <string>level0String</string>
-      <github.compile.mapper.mapping.DefaultValueMappingDefinition>
-        <defaultValue class="string">dafultValue</defaultValue>
-      </github.compile.mapper.mapping.DefaultValueMappingDefinition>
-    </entry>
-    <entry>
-      <string>level0primitive</string>
-      <github.compile.mapper.mapping.SimpleMappingDefinition/>
-    </entry>
-  </pathConfigMap>
+	<pathConfigMap>
+		<entry>
+			<string>level0String</string>
+			<github.compile.mapper.mapping.DefaultValueMappingDefinition>
+				<defaultValue class="string">dafultValue</defaultValue>
+			</github.compile.mapper.mapping.DefaultValueMappingDefinition>
+		</entry>
+		<entry>
+			<string>level0primitive</string>
+			<github.compile.mapper.mapping.SimpleMappingDefinition />
+		</entry>
+		<entry>
+			<string>level0Complex</string>
+			<github.compile.mapper.mapping.ConverterMappingDefinition>
+				<covrenerClass>github.compile.example.SampleConverter</covrenerClass>
+				<convertMethod>convert</convertMethod>
+				<converterParams>
+					<github.compile.mapper.source.StringConverterParam>
+						<value>paramValue</value>
+					</github.compile.mapper.source.StringConverterParam>
+				</converterParams>
+			</github.compile.mapper.mapping.ConverterMappingDefinition>
+		</entry>
+	</pathConfigMap>
 </github.compile.mapper.source.annotation.AnnotatedPathConfig>

@@ -19,7 +19,7 @@ public class GenerateMapperLookup {
         mapTarget00();
     }
 
-    public String lookup_target() {
+    public String mapTargetLookup() {
         if ((lookup==null)) {
             return null;
         }
@@ -65,7 +65,7 @@ public class GenerateMapperLookup {
         }
         String value;
         String decl;
-        value = lookup_target();
+        value = mapTargetLookup();
         decl = ((String) value);
         innertargetclass21 .setTg3(decl);
     }

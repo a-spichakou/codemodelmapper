@@ -2,8 +2,6 @@ package github.compile.example;
 
 import github.compile.mapper.source.annotation.MapTo;
 import github.compile.mapper.source.annotation.SourceMappingAnnotation;
-import github.compile.mapper.test.SourceLevel1;
-import github.compile.mapper.test.Target;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +42,7 @@ public class Source {
 		this.level0String = level0String;
 	}
 
+	@SourceMappingAnnotation(index="level0Complex")
 	public Date getLevel0Complex() {
 		return level0Complex;
 	}

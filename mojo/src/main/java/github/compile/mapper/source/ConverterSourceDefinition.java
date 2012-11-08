@@ -1,8 +1,11 @@
 package github.compile.mapper.source;
 
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.ClassUtils;
 
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JConditional;
@@ -17,8 +20,8 @@ import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 
 public class ConverterSourceDefinition extends SimpleSourceDefinition {
-	private static final String CONVERTER_PARAM_METHOD_NAME = "getParam";
-	private static final String CONVERTER_CONVERT_METHOD_NAME = "convert";
+	private static final String CONVERTER_PARAM_METHOD_NAME = "GetParam";
+	private static final String CONVERTER_CONVERT_METHOD_NAME = "Convert";
 	private static final String CONVERTER_VALUE_MEMBER_NAME = "converter";
 	private Class<?> converterClass;
 	private Method converterMethod;
@@ -27,11 +30,11 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 	
 	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
 		// Create getParam() method
-		final JMethod getParams = mapClass.method(JMod.PUBLIC, List.class, CONVERTER_PARAM_METHOD_NAME);
+		final JMethod getParams = mapClass.method(JMod.PUBLIC, List.class, getMapMethodName()+CONVERTER_PARAM_METHOD_NAME);
 		buildGetParamsMethod(getParams, codeModel, mapClass);
 		
 		// build getValue method
-		final JMethod convertMethod = mapClass.method(JMod.PUBLIC, converterMethod.getReturnType(), CONVERTER_CONVERT_METHOD_NAME);
+		final JMethod convertMethod = mapClass.method(JMod.PUBLIC, converterMethod.getReturnType(), getMapMethodName()+CONVERTER_CONVERT_METHOD_NAME);
 		buildInvokeConverterMethod(convertMethod, getParams, codeModel, mapClass);
 		
 		// build set method
@@ -48,7 +51,26 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 		
 		
 		final JConditional nullCheck = jmethod.body()._if(JExpr.direct(converterMemberField.name()+"==null"));
-		nullCheck._then()._return(JExpr._null());
+		if(jmethod.type().isPrimitive() && !jmethod.type().isArray())
+		{
+			// convert primitive to wrapper
+			Class<?> forName;
+			try {
+				forName = Utils.forName(jmethod.type().name());
+				Class<?> forName1 = ClassUtils.primitiveToWrapper(forName);
+				final Object forNameValue = Utils.forNameValue(forName);
+				final JInvocation newVal = JExpr._new(codeModel.ref(forName1));
+				newVal.arg(JExpr.direct(forNameValue.toString()));
+				nullCheck._then()._return(newVal);
+			} catch (ClassNotFoundException e) {
+				// ignore
+				e.printStackTrace();
+			}							
+		}
+		else
+		{
+			nullCheck._then()._return(JExpr._null());
+		}
 		
 		// create class method getValue()
 		final JMethod getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME);
@@ -71,7 +93,7 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 		// Add second param as list of getParams() 
 		invoke.arg(JExpr.invoke(getParams));
 		
-		jmethod.body().add(invoke);		
+		//jmethod.body().add(invoke);		
 		jmethod.body()._return(invoke);
 	}
 	
@@ -96,6 +118,16 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 				// Add result of invoke of method getParam0 to list
 				final JInvocation invoke = paramsList.invoke("add");
 				invoke.arg(JExpr.invoke(getParamMethod));
+				getParams.body().add(invoke);
+			}
+			else if(param instanceof WrappedAbstractConverterSourceParam)
+			{
+				final WrappedAbstractConverterSourceParam wrapper = (WrappedAbstractConverterSourceParam)param;
+				final JInvocation invoke = paramsList.invoke("add");
+				final JType ref = codeModel.ref(wrapper.getValue().getClass());
+				final JInvocation newParam = JExpr._new(ref);
+				invoke.arg(newParam);
+				newParam.arg(wrapper.getValue().toString());
 				getParams.body().add(invoke);
 			}
 		}

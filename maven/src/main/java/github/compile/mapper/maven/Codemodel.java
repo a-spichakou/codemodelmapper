@@ -37,7 +37,7 @@ public class Codemodel {
 				try {
 					annotated.add(Class.forName(className));
 				} catch (ClassNotFoundException e) {
-					throw new RuntimeException("Something went wroing: " + e.getMessage());
+					throw new RuntimeException("Something went wrong: " + e.getMessage());
 				}
 			}
 		});
@@ -45,7 +45,7 @@ public class Codemodel {
 		try {
 			cf.detect(package2scan);
 		} catch (IOException e1) {
-			throw new RuntimeException("Something went wroing: " + e1.getMessage());
+			throw new RuntimeException("Something went wrong: " + e1.getMessage());
 		}
 
 		for (Class<?> source : annotated) {
@@ -62,7 +62,7 @@ public class Codemodel {
 				final JCodeModel generateMapper = generator.generateMapper(build);
 				generateMapper.build(new File(path2generate));
 			} catch (Exception e) {
-				throw new RuntimeException("Something went wroing: " + e.getMessage());
+				throw new RuntimeException("Something went wrong: " + e.getMessage());
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package github.compile.mapper.source;
 
 import java.lang.reflect.Method;
 
+import org.apache.commons.lang3.ClassUtils;
+
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JConditional;
 import com.sun.codemodel.JDefinedClass;
@@ -15,14 +17,14 @@ import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 
 public class LookupSourceDefinition extends AbstractSourceDefinition {
-	private static final String LOOKUP_VALUE_METHOD_NAME = "lookup";
+	private static final String LOOKUP_VALUE_METHOD_NAME = "Lookup";
 	private static final String LOOKUP_VALUE_MEMBER_NAME = "lookup";
 	private Class<?> lookupClass;
 	private Method lookupMethod;
 
 	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
 		// build lookup method
-		final JMethod lookup = mapClass.method(JMod.PUBLIC, lookupMethod.getReturnType(), LOOKUP_VALUE_METHOD_NAME+"_"+getTargetField().name());
+		final JMethod lookup = mapClass.method(JMod.PUBLIC, lookupMethod.getReturnType(), getMapMethodName()+LOOKUP_VALUE_METHOD_NAME);
 		buildLookupMethod(lookup, codeModel, mapClass);
 		
 		// build set method
@@ -39,7 +41,26 @@ public class LookupSourceDefinition extends AbstractSourceDefinition {
 		
 		
 		final JConditional nullCheck = jmethod.body()._if(JExpr.direct(lookupMemberField.name()+"==null"));
-		nullCheck._then()._return(JExpr._null());
+		if(jmethod.type().isPrimitive() && !jmethod.type().isArray())
+		{
+			// convert primitive to wrapper
+			Class<?> forName;
+			try {
+				forName = Utils.forName(jmethod.type().name());
+				Class<?> forName1 = ClassUtils.primitiveToWrapper(forName);
+				final Object forNameValue = Utils.forNameValue(forName);
+				final JInvocation newVal = JExpr._new(codeModel.ref(forName1));
+				newVal.arg(JExpr.direct(forNameValue.toString()));
+				nullCheck._then()._return(newVal);
+			} catch (ClassNotFoundException e) {
+				// ignore
+				e.printStackTrace();
+			}							
+		}
+		else
+		{
+			nullCheck._then()._return(JExpr._null());
+		}		
 		
 		// create class method getValue()
 		final JMethod getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME);

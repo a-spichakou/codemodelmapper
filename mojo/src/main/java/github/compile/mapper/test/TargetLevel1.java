@@ -1,5 +1,9 @@
 package github.compile.mapper.test;
 
+import github.compile.mapper.source.ComplexSourcePathNodeType;
+import github.compile.mapper.source.annotation.SourceMappingAnnotation;
+import github.compile.mapper.source.annotation.TargetMappingAnnotation;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,7 +45,7 @@ public class TargetLevel1 {
 	public void setLevel1Complex(Date level1Complex) {
 		this.level1Complex = level1Complex;
 	}
-
+	
 	public int[] getLevel1primitiveArray() {
 		return level1primitiveArray;
 	}
