@@ -22,7 +22,7 @@ public class GenerateMapperLookupTest extends TestCase {
 		src1.setSrc2(src2);
 		src2.setSource("param1");
 		mapper.target = new TargetObject();
-		mapper.lookup = new SimpleLookup();
+		mapper.lookup0 = new SimpleLookup();
 
 		mapper.map();
 

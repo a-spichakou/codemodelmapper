@@ -1,5 +1,6 @@
 package github.compile.example;
 
+import github.compile.mapper.source.ComplexSourcePathNodeType;
 import github.compile.mapper.source.annotation.MapTo;
 import github.compile.mapper.source.annotation.SourceMappingAnnotation;
 
@@ -91,6 +92,7 @@ public class Source {
 		this.level0List = level0List;
 	}
 
+	@SourceMappingAnnotation(index="level0Map",complexParam="key",exactClass=String.class, type=ComplexSourcePathNodeType.MAP)
 	public HashMap getLevel0Map() {
 		return level0Map;
 	}

@@ -46,7 +46,7 @@ public class SourceDefinitionFactory {
 		this.target = target;
 	}
 
-	public ISourceDefinition getSourceDefinition(IMappingDefinition mappingDefinition) throws ClassNotFoundException {
+	public ISourceDefinition getSourceDefinition(IMappingDefinition mappingDefinition, int index) throws ClassNotFoundException {
 		if (mappingDefinition.getType().equals(SimpleMappingDefinition.SimpleMappingDefinition)) {
 			final SimpleMappingDefinition def = (SimpleMappingDefinition) mappingDefinition;
 			final List<PathNode> source = def.getSourcePath();
@@ -72,7 +72,7 @@ public class SourceDefinitionFactory {
 
 			return codemodel;
 		} else if (mappingDefinition.getType().equals(LookupMappingDefinition.LookupMappingDefinition)) {
-			final LookupMappingDefinition def = (LookupMappingDefinition) mappingDefinition;
+			final LookupMappingDefinition def = (LookupMappingDefinition) mappingDefinition;			
 			final List<PathNode> source = def.getSourcePath();
 			final List<PathNode> target = def.getTargetPath();
 
@@ -82,6 +82,7 @@ public class SourceDefinitionFactory {
 			final LookupSourceDefinition codemodel = new LookupSourceDefinition();
 			codemodel.setTargetPath(targetPath);
 			codemodel.setSourcePath(sourcePath);
+			codemodel.setIndex(index);
 
 			final Class<?> targetClass = getClass().getClassLoader().loadClass(def.getMappingClass());
 			codemodel.setLookupClass(targetClass);
@@ -109,6 +110,7 @@ public class SourceDefinitionFactory {
 			final ConverterSourceDefinition codemodel = new ConverterSourceDefinition();
 			codemodel.setTargetPath(targetPath);
 			codemodel.setSourcePath(sourcePath);
+			codemodel.setIndex(index);
 
 			final Class<?> targetClass = getClass().getClassLoader().loadClass(def.getCovrenerClass());
 			codemodel.setConverterClass(targetClass);

@@ -69,8 +69,10 @@ public class MapperSourceGenerator {
 		final List<ISourceDefinition> codeModelDefinitions = new ArrayList<ISourceDefinition>();
 		final SourceDefinitions sourceDefinitions = new SourceDefinitions();
 		sourceDefinitions.setDefinitions(codeModelDefinitions);
-		for (IMappingDefinition def : definitionsList) {
-			final ISourceDefinition sourceDefinition = factory.getSourceDefinition(def);
+		int index=0;
+		for (IMappingDefinition def : definitionsList) {			
+			final ISourceDefinition sourceDefinition = factory.getSourceDefinition(def, index);
+			index++;
 			codeModelDefinitions.add(sourceDefinition);
 		}
 		final JCodeModel buildMapper = buildMapper(codeModelDefinitions);

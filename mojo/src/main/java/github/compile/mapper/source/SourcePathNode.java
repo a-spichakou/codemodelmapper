@@ -124,7 +124,7 @@ public class SourcePathNode {
 			}
 						
 			final JExpressionImpl addParamToSetWithInitMethod = addParamToSetWithInitMethod(codeModel,jmethod,target,declNewDelcare);
-			final JInvocation invoke = addParamToSetWithInitMethod.invoke("add");
+			final JInvocation invoke = addParamToSetWithInitMethod.invoke("set");
 			jmethod.body().add(invoke);
 			invoke.arg(JExpr.direct(complexParam.toString()));
 			invoke.arg(value);

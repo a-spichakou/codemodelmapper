@@ -21,10 +21,11 @@ public class LookupSourceDefinition extends AbstractSourceDefinition {
 	private static final String LOOKUP_VALUE_MEMBER_NAME = "lookup";
 	private Class<?> lookupClass;
 	private Method lookupMethod;
+	private int index;
 
 	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
 		// build lookup method
-		final JMethod lookup = mapClass.method(JMod.PUBLIC, lookupMethod.getReturnType(), getMapMethodName()+LOOKUP_VALUE_METHOD_NAME);
+		final JMethod lookup = mapClass.method(JMod.PUBLIC, lookupMethod.getReturnType(), getMapMethodName()+LOOKUP_VALUE_METHOD_NAME+index);
 		buildLookupMethod(lookup, codeModel, mapClass);
 		
 		// build set method
@@ -37,7 +38,7 @@ public class LookupSourceDefinition extends AbstractSourceDefinition {
 	private void buildLookupMethod(JMethod jmethod, JCodeModel codeModel, JDefinedClass mapClass)
 	{
 		// create filed with lookup object
-		final JFieldVar lookupMemberField = mapClass.field(JMod.PUBLIC, lookupClass, LOOKUP_VALUE_MEMBER_NAME);
+		final JFieldVar lookupMemberField = mapClass.field(JMod.PUBLIC, lookupClass, LOOKUP_VALUE_MEMBER_NAME+index);
 		
 		
 		final JConditional nullCheck = jmethod.body()._if(JExpr.direct(lookupMemberField.name()+"==null"));
@@ -63,7 +64,7 @@ public class LookupSourceDefinition extends AbstractSourceDefinition {
 		}		
 		
 		// create class method getValue()
-		final JMethod getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME);
+		final JMethod getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME+LOOKUP_VALUE_METHOD_NAME+index);
 		buildGetStatement(getValueMethod, codeModel);
 		
 		// invoke getValue() method and set to "value" var
@@ -100,4 +101,8 @@ public class LookupSourceDefinition extends AbstractSourceDefinition {
 	public void setLookupMethod(Method lookupMethod) {
 		this.lookupMethod = lookupMethod;
 	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}	
 }

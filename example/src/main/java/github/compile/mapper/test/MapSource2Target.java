@@ -2,43 +2,49 @@
 package github.compile.mapper.test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import github.compile.example.SampleConverter;
+import github.compile.example.SampleLookup;
 import github.compile.example.Source;
 import github.compile.example.Target;
 import github.compile.example.TargetLevel1;
+import github.compile.mapper.source.Utils;
 
 public class MapSource2Target {
 
     public Source source;
     public Target target;
-    public SampleConverter converter;
+    public SampleConverter converter0;
+    public SampleLookup lookup2;
 
     public void map() {
         mapTarget00();
         mapTarget1();
-        mapTarget2();
+        mapTarget22();
+        mapTarget3();
     }
 
-    public List mapTargetGetParam() {
+    public List mapTargetGetParam0() {
         List params = new ArrayList();
         params.add(new String("paramValue"));
         return params;
     }
 
-    public int mapTargetConvert() {
-        if ((converter==null)) {
+    public int mapTargetConvert0() {
+        if ((converter0==null)) {
             return new Integer((0));
         }
         Object value;
-        value = getValue();
+        value = getValueConvert0();
         Date valueCasted;
         valueCasted = ((Date) value);
-        return converter.convert(valueCasted, mapTargetGetParam());
+        return converter0 .convert(valueCasted, mapTargetGetParam0());
     }
 
-    public Object getValue() {
+    public Object getValueConvert0() {
         Date date0;
         date0 = ((Date) source.getLevel0Complex());
         if ((date0==null)) {
@@ -56,7 +62,7 @@ public class MapSource2Target {
         }
         int value;
         Integer decl;
-        value = mapTargetConvert();
+        value = mapTargetConvert0();
         decl = ((Integer) value);
         int[] declNewDelcare;
         declNewDelcare = targetlevel10 .getLevel1primitiveArray();
@@ -85,7 +91,56 @@ public class MapSource2Target {
         target.setLevel0String(decl);
     }
 
-    public Object getValue2() {
+    public String mapTargetLookup2() {
+        if ((lookup2==null)) {
+            return null;
+        }
+        Object value;
+        value = getValueLookup2();
+        String valueCasted;
+        valueCasted = ((String) value);
+        lookup2 .lookup(valueCasted);
+        return lookup2 .lookup(valueCasted);
+    }
+
+    public Object getValueLookup2() {
+        String string0;
+        HashMap varFromGetter;
+        varFromGetter = source.getLevel0Map();
+        string0 = ((String) varFromGetter.get("key"));
+        if ((string0==null)) {
+            return null;
+        }
+        return string0;
+    }
+
+    public void mapTarget22() {
+        String value;
+        String decl;
+        value = mapTargetLookup2();
+        decl = ((String) value);
+        ArrayList declNewDelcare;
+        declNewDelcare = target.getLevel0List();
+        if (declNewDelcare == null) {
+            declNewDelcare = new ArrayList();
+            target.setLevel0List(declNewDelcare);
+        }
+        ArrayList newSizeList;
+        if (declNewDelcare.size()<(16)) {
+            newSizeList = new ArrayList((16));
+            Utils.initList(newSizeList, (16));
+            target.setLevel0List(newSizeList);
+            Collections.copy(newSizeList, declNewDelcare);
+        } else {
+            newSizeList = declNewDelcare;
+            if (newSizeList.get((15)) == null) {
+                newSizeList.add((15), new String());
+            }
+        }
+        newSizeList.set((15), decl);
+    }
+
+    public Object getValue3() {
         Integer integer0;
         integer0 = ((Integer) source.getLevel0primitive());
         if ((integer0==null)) {
@@ -94,10 +149,10 @@ public class MapSource2Target {
         return integer0;
     }
 
-    public void mapTarget2() {
+    public void mapTarget3() {
         Object value;
         Integer decl;
-        value = getValue2();
+        value = getValue3();
         decl = ((Integer) value);
         target.setLevel0primitive(decl);
     }

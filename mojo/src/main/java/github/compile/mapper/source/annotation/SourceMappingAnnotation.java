@@ -2,8 +2,10 @@ package github.compile.mapper.source.annotation;
 
 import github.compile.mapper.source.ComplexSourcePathNodeType;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * By this annotation developer should mark source path Get method
@@ -11,6 +13,7 @@ import java.lang.annotation.RetentionPolicy;
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 public @interface SourceMappingAnnotation {
 	/**
 	 * This index should be the same for one Path (both source and target path)

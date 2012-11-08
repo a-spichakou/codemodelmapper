@@ -72,7 +72,7 @@ public class GenerateMapperComplex2 {
                 newSizeList.add((2), new String());
             }
         }
-        newSizeList.add((2), decl);
+        newSizeList.set((2), decl);
     }
 
 }

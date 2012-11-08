@@ -22,5 +22,12 @@
 				</converterParams>
 			</github.compile.mapper.mapping.ConverterMappingDefinition>
 		</entry>
+		<entry>
+			<string>level0Map</string>
+			<github.compile.mapper.mapping.LookupMappingDefinition>
+				<mappingClass>github.compile.example.SampleLookup</mappingClass>
+				<lookupMethod>lookup</lookupMethod>
+			</github.compile.mapper.mapping.LookupMappingDefinition>
+		</entry>
 	</pathConfigMap>
 </github.compile.mapper.source.annotation.AnnotatedPathConfig>

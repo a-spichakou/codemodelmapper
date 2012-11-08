@@ -142,7 +142,7 @@ public class BuildTestTreeSimple0level {
                 newSizeList.add((2), new String());
             }
         }
-        newSizeList.add((2), decl);
+        newSizeList.set((2), decl);
     }
 
     public Object getValue5() {

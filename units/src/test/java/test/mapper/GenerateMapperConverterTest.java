@@ -23,7 +23,7 @@ public class GenerateMapperConverterTest extends TestCase{
 		src1.setSrc2(src2);
 		src2.setSource("param1");
 		mapper.target = new TargetObject();
-		mapper.converter = new SimpleConverter();
+		mapper.converter0 = new SimpleConverter();
 
 		mapper.map();
 

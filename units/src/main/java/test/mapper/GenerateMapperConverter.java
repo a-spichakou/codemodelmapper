@@ -15,13 +15,13 @@ public class GenerateMapperConverter {
 
     public SourceObject source;
     public TargetObject target;
-    public SimpleConverter converter;
+    public SimpleConverter converter0;
 
     public void map() {
         mapTarget00();
     }
 
-    public List mapTargetGetParam() {
+    public List mapTargetGetParam0() {
         List params = new ArrayList();
         params.add(GetParam_0());
         return params;
@@ -36,18 +36,18 @@ public class GenerateMapperConverter {
         return string0;
     }
 
-    public String mapTargetConvert() {
-        if ((converter==null)) {
+    public String mapTargetConvert0() {
+        if ((converter0==null)) {
             return null;
         }
         Object value;
-        value = getValue();
+        value = getValueConvert0();
         String valueCasted;
         valueCasted = ((String) value);
-        return converter.convert(valueCasted, mapTargetGetParam());
+        return converter0 .convert(valueCasted, mapTargetGetParam0());
     }
 
-    public Object getValue() {
+    public Object getValueConvert0() {
         InnerSourceClass1 innersourceclass10;
         innersourceclass10 = ((InnerSourceClass1) source.getSrc1());
         if ((innersourceclass10==null)) {
@@ -81,7 +81,7 @@ public class GenerateMapperConverter {
         }
         String value;
         String decl;
-        value = mapTargetConvert();
+        value = mapTargetConvert0();
         decl = ((String) value);
         innertargetclass21 .setTg3(decl);
     }

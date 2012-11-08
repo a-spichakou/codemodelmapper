@@ -23,6 +23,7 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 	private static final String CONVERTER_PARAM_METHOD_NAME = "GetParam";
 	private static final String CONVERTER_CONVERT_METHOD_NAME = "Convert";
 	private static final String CONVERTER_VALUE_MEMBER_NAME = "converter";
+	private int index;
 	private Class<?> converterClass;
 	private Method converterMethod;
 
@@ -30,11 +31,11 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 	
 	public JMethod extendJMethod(JCodeModel codeModel, JDefinedClass mapClass) {
 		// Create getParam() method
-		final JMethod getParams = mapClass.method(JMod.PUBLIC, List.class, getMapMethodName()+CONVERTER_PARAM_METHOD_NAME);
+		final JMethod getParams = mapClass.method(JMod.PUBLIC, List.class, getMapMethodName()+CONVERTER_PARAM_METHOD_NAME+index);
 		buildGetParamsMethod(getParams, codeModel, mapClass);
 		
 		// build getValue method
-		final JMethod convertMethod = mapClass.method(JMod.PUBLIC, converterMethod.getReturnType(), getMapMethodName()+CONVERTER_CONVERT_METHOD_NAME);
+		final JMethod convertMethod = mapClass.method(JMod.PUBLIC, converterMethod.getReturnType(), getMapMethodName()+CONVERTER_CONVERT_METHOD_NAME+index);
 		buildInvokeConverterMethod(convertMethod, getParams, codeModel, mapClass);
 		
 		// build set method
@@ -47,7 +48,7 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 	private void buildInvokeConverterMethod(JMethod jmethod, JMethod getParams, JCodeModel codeModel, JDefinedClass mapClass)
 	{
 		// create filed with converter object
-		final JFieldVar converterMemberField = mapClass.field(JMod.PUBLIC, converterClass, CONVERTER_VALUE_MEMBER_NAME);
+		final JFieldVar converterMemberField = mapClass.field(JMod.PUBLIC, converterClass, CONVERTER_VALUE_MEMBER_NAME+index);
 		
 		
 		final JConditional nullCheck = jmethod.body()._if(JExpr.direct(converterMemberField.name()+"==null"));
@@ -73,7 +74,7 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 		}
 		
 		// create class method getValue()
-		final JMethod getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME);
+		final JMethod getValueMethod = mapClass.method(JMod.PUBLIC, Object.class, GET_VALUE_METHOD_NAME+CONVERTER_CONVERT_METHOD_NAME+index);
 		buildGetStatement(getValueMethod, codeModel);
 		
 		// invoke getValue() method and set to "value" var
@@ -158,5 +159,9 @@ public class ConverterSourceDefinition extends SimpleSourceDefinition {
 	public void setConverterSourceParams(List<IConverterSourceParam> converterSourceParams) {
 		this.converterSourceParams = converterSourceParams;
 	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}	
 
 }

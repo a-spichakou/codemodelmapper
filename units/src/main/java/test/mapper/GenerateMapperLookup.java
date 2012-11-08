@@ -13,25 +13,25 @@ public class GenerateMapperLookup {
 
     public SourceObject source;
     public TargetObject target;
-    public SimpleLookup lookup;
+    public SimpleLookup lookup0;
 
     public void map() {
         mapTarget00();
     }
 
-    public String mapTargetLookup() {
-        if ((lookup==null)) {
+    public String mapTargetLookup0() {
+        if ((lookup0==null)) {
             return null;
         }
         Object value;
-        value = getValue();
+        value = getValueLookup0();
         String valueCasted;
         valueCasted = ((String) value);
-        lookup.lookup(valueCasted);
-        return lookup.lookup(valueCasted);
+        lookup0 .lookup(valueCasted);
+        return lookup0 .lookup(valueCasted);
     }
 
-    public Object getValue() {
+    public Object getValueLookup0() {
         InnerSourceClass1 innersourceclass10;
         innersourceclass10 = ((InnerSourceClass1) source.getSrc1());
         if ((innersourceclass10==null)) {
@@ -65,7 +65,7 @@ public class GenerateMapperLookup {
         }
         String value;
         String decl;
-        value = mapTargetLookup();
+        value = mapTargetLookup0();
         decl = ((String) value);
         innertargetclass21 .setTg3(decl);
     }

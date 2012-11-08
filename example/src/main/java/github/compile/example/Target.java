@@ -1,5 +1,6 @@
 package github.compile.example;
 
+import github.compile.mapper.source.ComplexSourcePathNodeType;
 import github.compile.mapper.source.annotation.TargetMappingAnnotation;
 
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class Target {
 		this.level0StringArray2dim = level0StringArray2dim;
 	}
 
+	@TargetMappingAnnotation(index="level0Map",complexParam="15",exactClass=String.class, type=ComplexSourcePathNodeType.LIST)
 	public ArrayList getLevel0List() {
 		return level0List;
 	}
