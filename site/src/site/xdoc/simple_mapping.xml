@@ -43,7 +43,7 @@ public int getLevel0primitive() {
 			</source>
 		</section>
 		<section name="Config">
-			<p>Now we need to create configuration where we should put default
+			<p>Now you need to create configuration where you should put default
 				value.
 				So, go to src/main/resource under your Maven project and
 				create XML

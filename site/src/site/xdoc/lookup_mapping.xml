@@ -2,45 +2,37 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 	<properties>
-		<title>Mapping with converter</title>
+		<title>Mapping with lookup</title>
 	</properties>
 	<body>
 		<section name="Case">
-			<p>You have 2 classes: Source.java with level0Complex field with type java.util.Date and
-				Target.java with field level1 (TargetLevel1) with field inside level1primitiveArray (int[]).
+			<p>You have 2 classes: Source.java with level0Map (Map) field and
+				Target.java with field level0List (List).
 				You need to copy value from
-				Source.level0primitive to Target.level1.level1primitiveArray by index '2'. Definitely, you need to create custom converter. There is code for converter class</p>
+				Source.level0Map by key == 'key' to Target.level0List by index '15'. Definitely, you need to create lookup class. There is code for lookup class</p>
 			<source>
 <![CDATA[	
 package github.compile.example;
 
-import java.util.Date;
-import java.util.List;
-
-public class SampleConverter {
-
-	public int convert(Date value, List params) {
-		if (value == null) {
-			return 0;
+public class SampleLookup {
+	public String lookup(String param) {
+		if (param == null) {
+			return "zero";
 		}
-		if (params == null || params.size() == 0) {
-			return -1;
+		if ("param1".equalsIgnoreCase(param)) {
+			return "value1";
 		}
-		for (Object param : params) {
-			if ("paramValue".equals(param)) {
-				return value.getYear();
-			}
+		if ("param2".equalsIgnoreCase(param)) {
+			return "value2";
 		}
-		return -2;
+		return "<empty>";
 	}
 
 }
 ]]>
 			</source>
 <p>
-Method convert() accepts 2 params: with type java.util.Date and list params. 
-Codemodel Mapper framework can accept as params for converter "path"" to source field inside "source" object as chain (the same format as for other paths)
-or list of custom static values. This example applies second way. 
+Method lookup() accepts value from source object and should return new value
 </p>
 		</section>
 		<section name="HowTo">
@@ -60,24 +52,17 @@ public class Source {
 			
 			<source>
 <![CDATA[	
-@SourceMappingAnnotation(index="level0Complex")
-public Date getLevel0Complex() {
+@SourceMappingAnnotation(index="level0Map",complexParam="key",exactClass=String.class, type=ComplexSourcePathNodeType.MAP)
+public HashMap getLevel0Map() {
 ]]>
 			</source>
 			<p>Target.java</p>
 			<source>
 <![CDATA[	
-@TargetMappingAnnotation(index="level0Complex")
-	public TargetLevel1 getLevel1() {
+@TargetMappingAnnotation(index="level0Map",complexParam="15",exactClass=String.class, type=ComplexSourcePathNodeType.LIST)
+public ArrayList getLevel0List() {
 ]]>
-			</source>
-			<p>TargetLevel1.java</p>
-			<source>
-<![CDATA[	
-@TargetMappingAnnotation(index="level0Complex",complexParam="2",exactClass=Integer.class,type=ComplexSourcePathNodeType.ARRAY)
-	public int[] getLevel1primitiveArray() {
-]]>
-			</source>			
+			</source>						
 		</section>
 		<section name="Config">
 			<p>Now you need to create configuration where we should put your configuration.
@@ -89,16 +74,11 @@ public Date getLevel0Complex() {
 <![CDATA[	
 <github.compile.mapper.source.annotation.AnnotatedPathConfig>
 	<entry>
-		<string>level0Complex</string>
-		<github.compile.mapper.mapping.ConverterMappingDefinition>
-			<covrenerClass>github.compile.example.SampleConverter</covrenerClass>
-			<convertMethod>convert</convertMethod>
-			<converterParams>
-				<github.compile.mapper.source.StringConverterParam>
-					<value>paramValue</value>
-				</github.compile.mapper.source.StringConverterParam>
-			</converterParams>
-		</github.compile.mapper.mapping.ConverterMappingDefinition>
+		<string>level0Map</string>
+		<github.compile.mapper.mapping.LookupMappingDefinition>
+			<mappingClass>github.compile.example.SampleLookup</mappingClass>
+			<lookupMethod>lookup</lookupMethod>
+		</github.compile.mapper.mapping.LookupMappingDefinition>
 	</entry>
 </github.compile.mapper.source.annotation.AnnotatedPathConfig>
 ]]>

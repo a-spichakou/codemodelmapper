@@ -1,6 +1,6 @@
 Mapping examples
 
-	All examples based on sample project available {{{https://github.com/a-spichakou/codemodelmapper/tree/master/example}here}}
+	All examples in the sample project available {{{https://github.com/a-spichakou/codemodelmapper/tree/master/example}here}}
 				
 	* {{{./simple_mapping.html}Simple mapping}}
 	
@@ -10,5 +10,4 @@ Mapping examples
 	
 	* {{{./lookup_mapping.html}Mapping with lookups}}
 	
-	* {{{./complex_mapping.html}Complex mapping from/to array/list/map}}
 	
